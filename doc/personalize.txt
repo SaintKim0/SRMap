@@ -1,0 +1,1086 @@
+맛집지도앱을 만들고 있는데, 여기에는 TV예능프로그램에 방영된맛집, 흑백요리사 참가자들의 레스토랑,미슐랭코리아 2025선정 1스타,2스타,3스타,빕구르망,Registered레스토랑 이렇게 구성되어있어. 나는 이 앱에서, 사용자들의 취향을 분석해서 사용자의 취향에 맞는 '오늘은뭐먹지?' 라는 테마를 만들어서 사용자에게 주변에 있는 적절한 레스토랑과 메뉴를 추천하고 싶어. 그래서, 사용자의 취향을 파악하는 설문조사를 앱 설치할 때 간단하게 하고, 그 설문조사결과를 바탕으로 사용자를 MBTI 같은 (가칭) 맛집MBTI 로 분류한 다음 음식취햐에 맞는사람들끼리 컴니티까지 생각중이야. 그래서, 우선 MBTI테스트 같은, 음식 MBTI 테스트를 만들어줄 수 있니?
+
+TV 예능 맛집부터 흑백요리사, 미쉐린 가이드까지 아우르는 고관여 맛집 앱인 만큼, 단순한 질문보다는 사용자의 **'미식 가치관'**을 투영할 수 있는 테스트가 필요하겠네요.
+
+MBTI의 4가지 지표를 응용하여, **[F.A.S.T]**라는 4가지 축의 맛집 MBTI를 설계해 보았습니다.
+
+🍽️ 맛집 MBTI: F.A.S.T 테스트
+1. 4가지 분석 지표 (Metric)
+Focus (목적): Fancy(분위기/경험) vs Function(맛/가성비)
+
+Adventure (도전): Accuracy(검증된 곳/미쉐린) vs Adventurous(신규/예능/노포)
+
+Social (소셜): Shared(커뮤니티/인증샷) vs Solo(조용히 음미/나만 알고 싶은)
+
+Texture (구성): Traditional(클래식/한식) vs Trendy(퓨전/컨템퍼러리)
+
+📝 질문지 (간편 설문 8문항)
+Q1. 중요한 기념일, 당신이 레스토랑을 고르는 기준은?
+
+(F) 인테리어가 예쁘고 서비스가 완벽한 '파인 다이닝'
+
+(f) 분위기는 상관없다, 무조건 입이 즐거운 '찐 맛집'
+
+Q2. 처음 가보는 동네에서 식당을 찾을 때 당신은?
+
+(A) 미쉐린 가이드나 전문가 리뷰가 검증한 곳 위주로 찾는다.
+
+(a) TV 예능이나 SNS에서 핫한 곳, 혹은 발길 닿는 대로 도전한다.
+
+Q3. 흑백요리사 식당을 예약했다! 당신이 가장 먼저 할 행동은?
+
+(S) 오픈채팅방이나 커뮤니티에 공유하고 같이 갈 사람을 찾거나 후기를 남긴다.
+
+(s) 예약 난이도를 뚫은 나 자신을 칭찬하며 조용히 음식을 즐길 준비를 한다.
+
+Q4. 평소 선호하는 요리 스타일은?
+
+(T) 오리지널의 깊은 맛을 살린 전통적인 요리 (곰탕, 클래식 프렌치)
+
+(t) 셰프의 창의성이 돋보이는 실험적인 요리 (퓨전, 분자요리)
+
+Q5. 웨이팅이 2시간이라는 소식을 들었을 때?
+
+(A) 그만큼 가치가 검증된 곳이니 끝까지 기다린다.
+
+(a) 근처의 다른 숨은 맛집을 찾아 떠난다.
+
+Q6. 음식이 나왔을 때 당신의 모습은?
+
+(S) 완벽한 각도로 사진을 찍어 SNS나 앱에 바로 업로드한다.
+
+(s) 사진은 빠르게 한 장만, 따뜻할 때 바로 입에 넣는다.
+
+Q7. '가성비'에 대한 당신의 생각은?
+
+(F) 빕 구르망처럼 합리적인 가격에 훌륭한 맛이 최고다.
+
+(f) 한 번을 먹어도 제대로 된 3스타급 다이닝에 투자하고 싶다.
+
+Q8. 메뉴판을 볼 때 가장 설레는 순간은?
+
+(T) 늘 먹던, 아는 맛의 정점을 찍은 메뉴를 볼 때
+
+(t) 한 번도 본 적 없는 조합의 신메뉴를 볼 때
+
+👑 결과 유형 예시 (Community 매칭)
+FAST (고독한 미식가형): 분위기 좋고 검증된 곳에서 조용히 클래식한 맛을 즐기는 타입. (미쉐린 1~3스타 선호)
+
+fast (골목대장형): 분위기보다 맛! 예능에 나온 노포나 시장 맛집을 찾아다니며 활발하게 소통하는 타입.
+
+fASt (트렌드 세터형): 흑백요리사 식당처럼 핫하고 창의적인 곳을 먼저 찾아가 인증하는 타입.
+
+💡 다음 단계 제안
+이렇게 분류된 MBTI를 기반으로 "오늘은 뭐 먹지?" 기능을 연결할 수 있습니다. 예를 들어 FAST 유형에게는 "조용히 대접받고 싶은 당신을 위한 미쉐린 예약 가이드"를, fast 유형에게는 "TV 방영 직후! 지금 가장 핫한 노포 리스트"를 푸시 알림으로 보낼 수 있죠.
+
+이 설문 문항들을 바탕으로 앱 내 UI 기획안이나 결과 페이지 디자인 문구도 함께 작성해 드릴까요?
+
+경제적인 부분도 고려해야하지않니? 가격이 너무 비싸면 안되잖아
+
+맞습니다. 미식의 세계에서 **'예산(Price)'**은 사용자가 앱을 지속적으로 사용할지 결정하는 가장 현실적이고 중요한 필터죠. 미쉐린 3스타부터 시장통 곰탕집까지 스펙트럼이 넓은 만큼, 경제적 관점을 반영한 **5번째 지표(P)**를 추가하여 [P.F.A.S.T] 체계로 보완해 보았습니다.
+
+💰 경제적 관점이 추가된 맛집 MBTI: P.F.A.S.T
+추가된 지표: P (Price Sensitivity)
+Premium(가심비): 가격이 비싸도 그만한 가치(경험, 맛)가 있다면 기꺼이 지불 (미쉐린 1~3스타, 파인 다이닝)
+
+Practical(가성비): 합리적인 가격대에서 최고의 만족을 추구 (빕 구르망, 예능 맛집, 로컬 맛집)
+
+📝 보완된 경제성 관련 질문 (추가)
+Q9. 오늘 저녁 메뉴를 정할 때, 당신의 우선순위는?
+
+(P) 가격은 상관없다. 오늘 꼭 먹고 싶은 '최고의 메뉴'가 중요하다.
+
+(p) 정해진 예산 안에서 가장 만족도가 높은 '알찬 메뉴'를 찾는다.
+
+Q10. 당신이 생각하는 가장 이상적인 외식은?
+
+(P) 가끔씩 나에게 주는 선물, 한 끼에 15~30만 원이라도 아깝지 않은 특별한 경험.
+
+(p) 매일 먹어도 부담 없는, 1~2만 원대로 즐기는 확실하고 검증된 맛.
+
+📊 경제성을 고려한 '오늘은 뭐 먹지?' 매칭 알고리즘
+단순히 취향만 분석하는 게 아니라, 사용자의 경제적 상황에 맞춰 추천 테마를 이원화할 수 있습니다.
+
+유형	추천 테마명	추천 대상 레스토랑
+Premium (가심비형)	"특별한 날, 당신을 빛내줄 한 끼"	미쉐린 1~3스타, 흑백요리사 리더급 다이닝
+Practical (가성비형)	"지갑은 가볍게, 입동굴은 즐겁게"	미쉐린 빕 구르망, TV 방영 로컬 맛집, 곰탕/국수 맛집
+💡 기획 포인트: '유동적 예산 설정'
+사용자가 항상 비싼 것만 먹거나 싼 것만 먹지는 않습니다. 따라서 설문조사에서는 **'평소 선호도'**를 파악하되, 앱 메인 화면의 [오늘은 뭐 먹지?] 버튼 옆에 간단한 가격대 슬라이더(예: 1만 원~20만 원+)를 두어 그날의 지갑 사정에 맞게 필터링되도록 구현하는 것이 좋습니다.
+
+이렇게 경제적인 부분까지 반영된 **MBTI 결과지(유형별 설명 문구)**를 구체화해 드릴까요? 예를 들어 "지갑을 지키는 미식가" 혹은 "한 끼에 진심인 럭셔리 탐험가" 같은 식으로요!
+
+오케이, 그런식으로 유형을 디자인해줘
+
+경제적인 관점(Price)을 포함하여, 사용자의 미식 성향을 한눈에 보여줄 수 있는 P.F.A.S.T 기반의 8가지 대표 유형을 디자인해 드립니다. 각 유형은 앱 내 커뮤니티에서 본인의 '닉네임'처럼 활용될 수 있습니다.
+
+🍽️ 맛집 MBTI (P.F.A.S.T) 8가지 유형 디자인
+1. 💎 명품 입맛의 미식 귀족 (P-F-A-S-T)
+특징: 가격보다는 완벽한 경험이 중요합니다. 미쉐린 3스타, 파인 다이닝을 선호하며 맛, 서비스, 분위기의 삼박자를 모두 따집니다.
+
+추천: 미쉐린 2~3스타, 흑백요리사 백수저 레스토랑.
+
+커뮤니티: "다이닝 에티켓 & 와인 페어링" 소모임.
+
+2. 📺 가성비 찾는 방송 추격자 (p-f-a-S-t)
+특징: TV 예능에 나온 맛집을 정복하는 게 취미입니다. 합리적인 가격의 로컬 맛집을 선호하며, SNS 인증샷과 공유를 즐깁니다.
+
+추천: <어디로 튈지 몰라> 방영 식당, 빕 구르망, 흑백요리사 흑수저 식당.
+
+커뮤니티: "이번 주 방송 맛집 정복단".
+
+3. 🔍 실속파 고독한 미식가 (p-F-A-s-T)
+특징: 남들에게 보여주기보다 내 입에 맞는 '진짜 맛'을 찾습니다. 조용히 혼밥하기 좋은 전통 있는 노포나 빕 구르망 식당을 선호합니다.
+
+추천: 진돼지곰탕, 평산옥 같은 한식/노포 리스트. [1]
+
+커뮤니티: "조용히 맛을 음미하는 사람들".
+
+4. 🚀 트렌드 리딩 미식 탐험가 (P-f-A-S-t)
+특징: 새롭게 뜨는 퓨전 요리나 팝업 레스토랑에 열광합니다. 가격이 비싸더라도 독특한 메뉴라면 가장 먼저 달려가서 리뷰를 남깁니다.
+
+추천: 컨템퍼러리 다이닝, 신규 등재 레스토랑. [1]
+
+커뮤니티: "신상 맛집 얼리어답터".
+
+5. 🏠 편안한 맛의 실용주의자 (p-f-a-s-T)
+특징: 익숙하고 편안한 맛을 가장 좋아합니다. 가성비 좋은 국밥, 메밀국수 등 전통적인 한식을 즐기며 줄 서는 곳보다는 단골집을 선호합니다.
+
+추천: 뫼밀집, 지역 기반 한식당. [1]
+
+커뮤니티: "우리 동네 숨은 단골집 공유".
+
+6. 🥂 분위기 먹는 감성 컬렉터 (P-F-a-S-t)
+특징: 맛만큼이나 인테리어와 플레이팅이 중요합니다. 데이트나 모임에 적합한 힙하고 화려한 분위기의 레스토랑을 골라 다닙니다.
+
+추천: 인테리어가 독특한 스모크다이닝, 뷰가 좋은 다이닝.
+
+커뮤니티: "인생샷 보장 맛집 지도".
+
+7. 🎓 학구파 미식 비평가 (P-F-A-s-T)
+특징: 셰프의 철학, 식재료의 원산지까지 파고듭니다. 정통 클래식 요리를 선호하며 전문가의 평가를 신뢰합니다.
+
+추천: 미쉐린 스타 정통 프렌치/일식.
+
+커뮤니티: "오늘의 메뉴 심층 분석".
+
+8. 🤝 함께 즐기는 미식 마당발 (p-f-A-S-T)
+특징: 여럿이 모여 시끌벅적하게 먹는 것을 좋아합니다. 양이 푸짐하고 대중적인 맛의 검증된 예능 맛집을 선호합니다.
+
+추천: 바비큐, 대형 고깃집, 예능 맛집 대기 정복.
+
+커뮤니티: "오늘 저녁 번개 모임".
+
+🌐 Sources
+guide.michelin.com - 미쉐린 가이드 - 공식 웹사이트
+
+이 유형들을 앱의 설문 결과 페이지에서 어떻게 보여줄까요? 각 유형별로 어울리는 캐릭터 이미지나 대표 문구를 더 구체화해 드릴까요?
+
+이걸, 대소문자로 구분하지말고, MBTI 형식으로 비슷하게 하면 안되니? 익숙하게 말이야. 몇몇개 의 특성과 성격들의 조합들로 구성할 수 잇을것 같은데...예를들면, 가격영역(비싼것ok, 싸면 더 좋아),분위기영역(조용하고 고급진곳 선호, 시끄럽고 활기찬곳 선호...) 예를들면 이런식으로 말이야. 대표적인 특성들 몇가지를 가지고 만들수 잇을것 같은데... 아이디어를 제안해줘
+
+사용자들에게 가장 친숙한 MBTI 형식을 그대로 차용하여, **[P.E.A.T]**라는 4가지 알파벳 조합의 맛집 성향 지표를 제안합니다. 각 지표는 서로 반대되는 명확한 가치를 가집니다.
+
+🍽️ 맛집 MBTI: P.E.A.T (피트) 시스템
+1. 4가지 핵심 지표 (Dimensions)
+P (Price) : 예산 중심
+
+Premium (가심비): 비싸더라도 특별한 경험과 높은 퀄리티가 최우선.
+
+Economy (가성비): 합리적인 가격과 푸짐한 구성, 실속 있는 한 끼가 최우선.
+
+E (Energy) : 공간 에너지
+
+Calm (정적인): 조용하고 프라이빗한 대화가 가능한 곳 선호.
+
+Vivid (동적인): 시끌벅적하고 활기찬 시장통이나 노포, 오픈 키친 선호.
+
+A (Authority) : 선택의 기준
+
+Star (검증파): 미슐랭, 블루리본 등 전문가가 검증한 '공인된' 맛집 신뢰.
+
+Hype (트렌드파): TV 예능, SNS, 흑백요리사 등 지금 가장 '핫한' 곳 도전.
+
+T (Taste) : 맛의 성향
+
+Classic (전통): 원조의 맛, 장인정신, 변하지 않는 클래식한 메뉴 선호.
+
+New-wave (창의): 퓨전, 컨템퍼러리, 셰프의 독창적인 재해석 선호.
+
+2. 대표적인 성향 조합 (예시 4가지)
+사용자들은 본인의 성향을 **"저는 P.C.S.C 타입이에요"**라고 말하게 됩니다.
+
+유형 이름	코드 (Code)	성향 설명	추천 맛집 테마
+럭셔리 미식 귀족	P.C.S.C	가격 상관없이 조용하고 클래식한 미슐랭 스타 식당을 즐김.	미슐랭 2~3스타 정통 다이닝
+핫플 사냥꾼	P.V.H.N	비싸더라도 흑백요리사 식당이나 힙한 퓨전 요리를 줄 서서라도 먹음.	흑백요리사 스타 셰프 팝업
+실속파 로컬 탐험가	E.V.H.C	TV 예능에 나온 시장 맛집이나 가성비 좋은 노포에서 활기를 느낌.	<어디로 튈지 몰라> 방영 노포
+가성비 미식 비평가	E.C.S.C	빕 구르망처럼 합리적이면서도 전문가가 인정한 조용한 고수 맛집을 찾음.	미슐랭 빕 구르망, 곰탕 맛집
+3. 사용자 질문지 구성 (Abbreviated)
+[P vs E] "기념일에 30만 원 다이닝 vs 평소 1만 원대 빕구르망 중 당신의 선택은?"
+
+[C vs V] "식당을 고를 때 '프라이빗 룸'이 필수인가요, 아니면 '북적이는 활기'가 좋은가요?"
+
+[S vs H] "전문가 평점이 높은 곳 vs 요즘 유튜브나 방송에서 가장 많이 언급되는 곳?"
+
+[C vs N] "대대손손 내려오는 원조 맛집 vs 이전에 없던 새로운 조합의 요리?"
+
+💡 기획 포인트
+이렇게 4가지 지표로 나누면 총 **16가지(2x2x2x2)**의 성향이 나옵니다. 앱 내 커뮤니티에서 "P.V.H.N 모여라!" 같은 소모임을 만들면 취향이 비슷한 사람들끼리 메뉴 선정부터 웨이팅 공유까지 훨씬 활발하게 일어날 것입니다.
+
+이 16가지 결과에 대해, 사용자가 앱에서 볼 수 있는 '캐릭터 카드'와 '찰떡궁합 메뉴'를 디자인해 볼까요?
+
+잘했어. 그런ㄷ, 이걸 조금 더 세분화 하자. 애매하게 반쯤걸친 성향들도 있으니까 말이야. 알겠니?
+
+성향이 칼로 자르듯 나뉘지 않고 **'중간 지대'**나 **'복합적 성향'**을 가진 유저들을 위해, 지표를 고정된 값이 아닌 **스펙트럼(점수제)**으로 설계하고 이를 **'성격의 농도'**로 표현하는 방식을 제안합니다.
+
+단순히 P냐 E냐가 아니라, "실속형에 가까운 프리미엄" 같은 세분화된 결과가 가능하도록 지표를 고정(Fixed)형에서 비중(Weight)형으로 확장하는 것입니다.
+
+🥗 세분화된 맛집 MBTI: P.E.A.T v2.0 (The Spectrum)
+단순 선택지가 아닌 **"어느 쪽에 더 가까운가?"**를 5단계(매우 그렇다 ~ 매우 아니다)로 측정하여 4가지 지표의 '비중'을 조합합니다.
+
+1. 4가지 핵심 지표의 확장 (Spectrum Scales)
+Price (지갑 가드)
+
+P (Premium): "한 끼에 20만 원 이상도 가치 있다면 OK"
+
+M (Moderate): "가격과 맛의 밸런스가 가장 중요 (중간층)" -> 신설
+
+E (Economy): "가성비가 최고의 미덕"
+
+Environment (공간 온도)
+
+C (Calm): "조용한 대화와 프라이빗함이 필수"
+
+B (Balanced): "적당히 활기차면서도 대화가 가능한 곳" -> 신설
+
+V (Vivid): "북적거리고 사람 냄새 나는 곳이 진짜 맛집"
+
+Authority (신뢰의 출처)
+
+S (Specialist): "미슐랭/블루리본 등 전문가 권위를 절대 신뢰"
+
+O (Open-minded): "전문가도 좋고 예능도 좋고, 두루 참고" -> 신설
+
+H (Hype): "방송, 유튜브, 흑백요리사 등 대중적인 화제성 중시"
+
+Taste (맛의 뿌리)
+
+C (Classic): "원조, 오리지널리티, 변하지 않는 깊은 맛"
+
+F (Fusion/Creative): "셰프의 개성, 새로운 식재료 조합, 실험적 맛"
+
+2. 세분화된 '애매한 성향'들을 위한 결과 타입 예시
+지표의 비중에 따라 **'하이브리드 유형'**을 명칭으로 부여합니다.
+
+"실속 있는 미식가" (M.C.S.C)
+
+특성: 미슐랭 스타보다는 빕 구르망이나 Registered 레스토랑을 선호. 가격은 합리적이어야 하지만 전문가의 검증은 포기 못 하며, 조용한 곳을 찾는 스타일.
+
+"트렌디한 노포 마니아" (E.V.O.C)
+
+특성: 예능에 나온 노포를 좋아하지만, 맛은 전통적이어야 함. 왁자지껄한 분위기를 즐기며 흑백요리사의 '시장 장인' 같은 스타일에 열광함.
+
+"화려한 미식 탐험가" (P.B.H.F)
+
+특성: 돈을 아끼지 않고 흑백요리사 식당이나 화제의 컨템퍼러리 다이닝을 찾아다님. 너무 정적인 것보다는 활기찬 셰프의 퍼포먼스를 즐김.
+
+3. 설문 조사 방식의 디테일 (8:2 혹은 7:3 비중)
+질문 결과가 5:5에 가깝게 나오면 "중립(Neutral)" 혹은 "올라운더(All-rounder)" 칭호를 부여하여 유연성을 줍니다.
+
+질문 예시: "미슐랭 식당과 예능 맛집 중 어디로 갈까요?"
+
+답변 A: 무조건 미슐랭 (S +2)
+
+답변 B: 미슐랭을 더 선호하지만 예능 맛집도 궁금 (S +1)
+
+답변 C: 둘 다 상관없음 (O)
+
+답변 D: 예능 맛집을 더 선호하지만 미슐랭도 가끔 (H +1)
+
+답변 E: 무조건 예능 맛집 (H +2)
+
+💡 기획 포인트: 커뮤니티 연결
+이렇게 세분화하면 "P.C.S.C(극강의 럭셔리)" 그룹과 "M.C.S.C(실속형 럭셔리)" 그룹이 같은 채널에서 대화하되, 서로 다른 가격대의 정보를 교환하며 시너지를 낼 수 있습니다.
+
+이제 이 세분화된 지표를 기반으로, 각 유저들에게 보여줄 '미식 리포트'와 '오늘의 추천 메뉴' 로직을 짜 드릴까요? 예를 들어 "당신은 가성비 70%, 도전정신 30%의 미식가입니다" 같은 형태입니다.
+
+진행해줘
+
+세분화된 P.E.A.T v2.0 스펙트럼을 기반으로, 사용자가 설문을 마쳤을 때 받게 될 **'개인 맞춤형 미식 리포트'**와 '오늘의 추천 메뉴' 알고리즘을 설계해 드립니다.
+
+📊 [P.E.A.T] 미식 성향 리포트 디자인
+사용자에게 단순한 결과값이 아닌, 자신의 미식 DNA를 시각화한 대시보드를 제공합니다.
+
+1. 성향 분석 그래프 (The Flavor Profile)
+지표별 퍼센트(%) 표시:
+
+Price: "당신은 가성비(Economy) 75%의 실속파입니다."
+
+Energy: "왁자지껄한(Vivid) 분위기를 60% 정도 선호하시네요."
+
+Authority: "전문가(Star)의 의견과 대중의 화제성(Hype)을 5:5로 참고하는 균형 잡힌 시각을 가졌습니다."
+
+Taste: "90%의 확고한 클래식(Classic) 입맛을 보유하고 계시군요!"
+
+2. 유형 명칭 및 캐릭터 부여
+코드 조합(예시)	유형 명칭	핵심 설명 문구
+M.C.S.C	실속 있는 화이트칼라	"합리적인 가격에 즐기는 품격 있는 한 끼, 빕 구르망의 제왕"
+P.V.H.N	에너제틱 미식 인플루언서	"흑백요리사 핫플은 내가 먼저! 돈보다 경험이 중요한 트렌드 세터"
+E.V.O.C	정 많은 노포 헌터	"TV에 나온 시장 국밥집에서 사람 냄새를 맡을 때 가장 행복한 미식가"
+P.C.S.N	완벽주의 미식 비평가	"조용한 공간에서 셰프의 새로운 창의성을 탐구하는 고독한 미식가"
+🍜 '오늘은 뭐 먹지?' 추천 알고리즘 로직
+사용자의 P.E.A.T 점수와 현재 상황(위치, 시간)을 결합하여 레스토랑을 추천합니다.
+
+STEP 1: 기본 필터링 (User Profile)
+P(Price) 점수 기준: 사용자가 'Practical(가성비)' 성향이 강하다면 검색 결과에서 빕 구르망과 Registered, TV 예능 맛집을 우선순위로 노출합니다.
+
+A(Authority) 점수 기준: 'Hype(트렌드)' 점수가 높으면 최근 흑백요리사 출연진 식당 중 예약 가능한 곳을 우선 추천합니다.
+
+STEP 2: 오늘의 테마 생성 (Thematic Engine)
+[유형: M.C.S.C] * 추천 문구: "오늘은 너무 복잡하지 않은 곳에서 검증된 맛을 느끼고 싶지 않으신가요?"
+
+추천 메뉴: 주변 미쉐린 가이드 Registered 등급의 한정식 혹은 깔끔한 곰탕.
+
+[유형: P.V.H.N]
+
+추천 문구: "지금 가장 핫한 그곳! 친구들에게 자랑하기 딱 좋은 메뉴는 어떠세요?"
+
+추천 메뉴: 주변 흑백요리사 참가자가 운영하는 다이닝 바 혹은 퓨전 요리.
+
+STEP 3: 커뮤니티 연결 (Social Matching)
+"당신과 같은 P.V.H.N 15명이 지금 이 식당을 찜했습니다! 같이 웨이팅할 파티원을 모집할까요?"
+
+"실속파 E.V.O.C들이 극찬한 오늘의 가성비 예능 맛집 TOP 3"
+
+💡 사용자 피드백 루프 (Adaptive Learning)
+설문조사는 시작일 뿐입니다. 사용자가 앱에서 실제로 방문한 식당에 '좋아요'를 누르거나 리뷰를 남기면 P.E.A.T 점수가 실시간으로 업데이트됩니다.
+
+예: "평소 가성비파였지만, 최근 미슐랭 스타 식당 방문이 늘어났네요! 당신의 성향이 **'성공한 미식가'**로 진화 중입니다."
+
+이 기획안을 바탕으로 **설문조사 화면의 UX/UI 와이어프레임(첫 화면 문구, 질문 배치 등)**을 구체화해 드릴까요? 아니면 커뮤니티에서 사용할 등급(티어) 시스템을 설계해 드릴까요?
+
+이 기획안을 맛집지도 내에 녹아넣어야 해. 앱을 시작할 때 실행할 수 있는 설문지를 작성해줘
+
+맛집 지도 앱의 첫인상을 결정할 "내 미식 DNA 찾기" 설문지 기획안입니다. 지루한 설문이 아니라, 마치 게임의 캐릭터를 생성하는 것처럼 흥미롭게 구성했습니다.
+
+🧬 맛집 DNA 테스트: 나의 [P.E.A.T] 찾기
+이 설문은 앱 설치 직후 1회 진행하며, 결과는 언제든 마이페이지에서 수정 가능합니다.
+
+[Intro]
+"당신은 어떤 테이블에 앉을 때 가장 행복한가요?" > 1분 만에 당신의 미식 DNA를 분석하고, 흑백요리사부터 미쉐린까지 딱 맞는 식당만 골라드릴게요.
+
+[Section 1] Price (지갑 가드)
+Q1. 이번 주말, 정말 가보고 싶던 식당의 메뉴판을 확인했습니다. 당신의 반응은?
+
+가격은 숫자일 뿐! 최고의 경험을 위해서라면 30만 원도 아깝지 않다. (P)
+
+분위기에 따라 다르지. 가끔은 큰맘 먹고 지를 준비가 되어 있다. (M)
+
+한 끼에 그 돈을? 1~3만 원대라도 충분히 맛있는 곳이 훨씬 많다. (E)
+
+[Section 2] Environment (공간 온도)
+Q2. 식당 문을 열었을 때, 당신이 선호하는 공기는?
+
+옆 테이블 대화 소리가 들리지 않는 고요하고 프라이빗한 공간 (C)
+
+적당한 활기와 음악, 대화 소리가 어우러진 세련된 다이닝 (B)
+
+북적거리는 소음, 주방의 불 쇼, 사람 냄새 나는 활기찬 시장통 (V)
+
+[Section 3] Authority (신뢰의 출처)
+Q3. 맛집을 고를 때, 당신이 가장 신뢰하는 증표는?
+
+전 세계가 인정한 **미쉐린 가이드의 '별(Star)'**이나 블루리본 (S)
+
+둘 다 참고하는 편! 전문가 의견도 좋고 대중적인 인기도 중요하다 (O)
+
+지금 가장 핫한 TV 예능(어디로 튈지 몰라), 흑백요리사 등의 화제성 (H)
+
+[Section 4] Taste (맛의 뿌리)
+Q4. 오늘 당신의 혀를 자극하는 가장 매력적인 제안은?
+
+3대째 내려오는 비법 육수, 원조의 깊은 맛을 느끼고 싶다 (Classic)
+
+셰프의 독창적인 해석이 들어간 한 번도 경험 못한 새로운 맛 (New-wave)
+
+[Outro: 결과 확인 중...]
+(애니메이션 효과: 돋보기로 지도를 탐색하는 그래픽)
+
+[결과 페이지 예시: "실속 있는 화이트칼라 (M.C.S.C)"]
+나의 DNA: 당신은 합리적인 가격 안에서 정갈하고 조용한 미식을 즐기는 타입입니다!
+
+찰떡 매칭: "왁자지껄한 시장보다는 미쉐린 빕 구르망이나 Registered 레스토랑이 당신의 힐링 플레이스네요."
+
+첫 추천 테마: [오늘의 추천] 당신 주변, 2만 원대로 즐기는 미쉐린 등재 평양냉면 어떠세요?
+
+💡 앱 기획 연동 포인트 (UX)
+필터 자동 설정: 설문이 끝나면 지도 메인 화면의 필터가 사용자의 DNA에 맞춰 자동으로 세팅됩니다. (예: E성향 유저에게는 저렴한 예능 맛집 핀이 먼저 보임)
+
+프로필 배지: 커뮤니티 게시판에서 닉네임 옆에 P.C.S.N 같은 배지를 부여하여 신뢰도를 높입니다.
+
+데이터 보정: 유저가 특정 식당을 '찜'하거나 '리뷰'할 때마다 이 DNA 지표가 미세하게 조정되어 추천의 정확도를 높입니다.
+
+이 설문지의 디자인 톤앤매너(예: 파스텔톤 귀여운 캐릭터형 vs 전문적인 블랙/골드형) 중 어떤 스타일로 앱에 녹여낼까요?
+
+오늘 지금까지 나와 한 이야기를 정리해서 앱내의 서물지만들고 평가해서 개인화 하도록 하는 prd를 작성해줘. 물론 전문가위원회를 열어서 회의록도 만들고 그에따른 task list도 문서화 해줘
+
+오늘 나눈 논의를 바탕으로 [P.E.A.T] 미식 DNA 기반 맞춤형 맛집 지도 앱의 제품 요구 사항 정의서(PRD) 및 관련 문서를 작성해 드립니다.
+
+[PRD] 미식 DNA(P.E.A.T) 기반 초개인화 맛집 추천 시스템
+1. 제품 개요 (Product Overview)
+제품명: (가칭) TastyMap - 초개인화 미식 큐레이션 서비스
+
+핵심 가치: TV 예능, 흑백요리사, 미쉐린 등 방대한 맛집 데이터를 사용자의 미식 성향(P.E.A.T)과 결합하여 "실패 없는 오늘 점심"을 제안함.
+
+목표: 단순한 지도 앱을 넘어, 사용자 취향 분석을 통한 커뮤니티 형성 및 충성 고객 확보.
+
+2. 주요 기능 및 사용자 여정 (Key Features)
+Onboarding (DNA 테스트): 설치 직후 4~5개 문항의 설문을 통해 유저의 P.E.A.T 유형 결정.
+
+Adaptive Map (맞춤형 지도): DNA 결과에 따라 지도상의 핀(Pin) 노출 우선순위 조정.
+
+Personalized Theme (오늘은 뭐 먹지?): 사용자의 예산과 기분을 반영한 매일 오전 11:30 맞춤 푸시.
+
+Community (성향별 모임): 동일한 P.E.A.T 코드를 가진 유저들끼리의 리뷰 공유 및 번개 모임.
+
+🎙️ 전문가위원회 회의록 (Professional Committee Minutes)
+일시: 2026년 2월 4일 참석자: 서비스 기획자(PM), 데이터 사이언티스트, UX 디자이너, 마케팅 전략가
+
+[주요 논의 사항]
+PM: "사용자가 너무 세분화되면 오히려 선택 장애를 겪을 수 있다. 16가지 기본 유형을 제공하되, 내부에선 스펙트럼 수치로 관리하자."
+
+Data Scientist: "초기 설문 데이터만으론 부족하다. 실제 방문(Check-in) 및 리뷰 데이터와 설문 값을 7:3 비중으로 혼합하여 DNA를 실시간 보정하는 알고리즘이 필요하다."
+
+UX Designer: "설문이 '숙제'처럼 느껴지면 안 된다. 흑백요리사 셰프들의 대결 구도처럼 흥미로운 이미지 선택형 UI를 제안한다."
+
+Marketer: "경제성(Price) 지표가 핵심이다. '무조건 싼 것'이 아니라 '내가 허용 가능한 사치'의 범위를 명확히 하는 것이 마케팅 소구점이다."
+
+📋 개발 및 실행 Task List (Action Items)
+Phase 1: 기반 설계 (Week 1-2)
+[ ] [기획] 16가지 P.E.A.T 유형별 상세 정의 및 캐릭터 카드 문구 확정
+
+[ ] [데이터] 미쉐린, 예능 맛집, 흑백요리사 식당 데이터베이스(DB) 매핑 작업
+
+[ ] [알고리즘] 설문 응답별 지표 가중치(Weight) 로직 설계
+
+Phase 2: 개발 및 UI/UX (Week 3-5)
+[ ] [UI/UX] 애니메이션이 포함된 미식 DNA 테스트 인터페이스 제작
+
+[ ] [Front-end] 사용자 성향에 따른 지도 필터 커스텀 기능 구현
+
+[ ] [Back-end] 개인화 추천 엔진(오늘은 뭐 먹지?) API 개발
+
+Phase 3: 테스트 및 고도화 (Week 6-8)
+[ ] [QA] 설문 결과와 실제 추천 맛집 간의 정합성 테스트
+
+[ ] [마케팅] "나의 맛집 MBTI 공유하기" 바이럴 캠페인 준비
+
+[ ] [커뮤니티] 성향별 오픈 채팅/게시판 연동 기능 점검
+
+이 PRD와 태스크 리스트를 기반으로 바로 프로젝트를 시작하실 수 있습니다. 혹시 **첫 번째 개발 마일스톤을 위한 상세 화면 설계서(Wireframe)**를 작성해 드릴까요? 혹은 **투자 유치를 위한 한 페이지 요약(One-pager)**이 필요하신가요?
+
+**첫 번째 개발 마일스톤을 위한 상세 화면 설계서(Wireframe)**를 작성해줘
+
+첫 번째 개발 마일스톤의 핵심인 **'온보딩(설문)부터 맞춤형 지도 진입'**까지의 상세 화면 설계서(Wireframe)를 작성해 드립니다. 사용자가 앱의 가치를 즉각적으로 느낄 수 있도록 직관적인 UI 흐름에 집중했습니다.
+
+📱 상세 화면 설계서 (Wireframe v1.0)
+1. [Screen 1] 인트로 & 시작 (Intro)
+비주얼: 상단에 고급스러운 골드 톤의 맛집 핀 애니메이션.
+
+카피: "당신만의 미식 DNA를 찾아 드릴게요."
+
+컴포넌트:
+
+[이미지] 흑백요리사 안대 모티프 혹은 미슐랭 별 그래픽.
+
+[버튼] '나의 맛집 DNA 측정 시작' (풀 사이즈 버튼)
+
+[링크] '이미 계정이 있어요 (로그인)'
+
+2. [Screen 2] 스펙트럼 설문 (The DNA Test)
+상단: 진행률 표시 바 (Progress Bar) - "질문 1/4"
+
+중앙: 가로형 슬라이더 혹은 카드 선택형 UI.
+
+질문 예시 (Price 영역): "오늘 저녁 메뉴를 고를 때 당신의 마음은?"
+
+좌측 카드: "가격은 상관없어! 최고의 맛과 분위기라면 OK" (Premium)
+
+우측 카드: "가성비가 핵심! 합리적인 가격의 로컬 맛집" (Economy)
+
+인터랙션: 단순히 누르는 것이 아니라 카드를 스와이프(Swipe)하여 선택하도록 유도해 재미 요소 부여.
+
+3. [Screen 3] 분석 애니메이션 (Loading)
+비주얼: "데이터 분석 중..." 문구와 함께 미슐랭 가이드북이 넘어가고 흑백요리사 셰프들의 실루엣이 교차되는 효과.
+
+카피: "당신 주변 2,400개의 식당 중 최적의 장소를 매칭하고 있습니다."
+
+4. [Screen 4] 결과지 및 캐릭터 카드 (Result Card)
+헤더: [P.C.S.N] 완벽주의 미식 비평가
+
+핵심 데이터:
+
+P(75%): "당신은 가끔 나를 위한 사치를 즐깁니다."
+
+E(20%): "시끄러운 곳보다는 조용한 대화를 선호하시네요."
+
+콘텐츠:
+
+찰떡 궁합: "미슐랭 1스타 컨템퍼러리 다이닝"
+
+함께 가기 좋은 유형: "활발한 트렌드 세터(P.V.H.N)"
+
+액션: [지도에서 내 맛집 확인하기] (강조 버튼)
+
+5. [Screen 5] 맞춤형 지도 메인 (Personalized Map)
+상단 바: 돋보기 옆에 내 DNA 배지(P.C.S.N) 표시.
+
+지도 영역:
+
+내 성향에 맞는 핀은 금색/빨간색으로 크게 노출.
+
+성향에 맞지 않는 핀은 투명도를 주거나 작게 표시.
+
+하단 탭: [오늘은 뭐 먹지?] 플로팅 버튼 (AI가 오늘의 예산과 날씨를 고려해 3곳을 제안).
+
+🛠️ 개발 구현 가이드 (Technical Note)
+기능	구현 상세
+성향 점수화	각 질문당 5점 척도 부여 -> 최종 점수를 백분율(%)로 환산하여 유형 결정.
+지도 필터링	API 호출 시 user_dna_code를 파라미터로 전달하여 가중치가 높은 식당 순으로 정렬.
+로컬 스토리지	최초 설문 결과는 기기에 저장하고, 회원가입 시 DB로 동기화.
+💡 다음 단계 제안
+이 와이어프레임을 바탕으로 실제 UI 디자인(피그마 시안) 작업으로 넘어가거나, 설문 응답에 따라 자동으로 생성되는 **'개인화 추천 문구 DB'**를 구축할 수 있습니다. 어떤 작업을 먼저 도와드릴까요?
+
+이 와이어프레임을 바탕으로 실제 UI 디자인(피그마 시안) 작업
+
+피그마(Figma) 시안 작업을 위해, 개발자와 디자이너가 바로 참고할 수 있는 UI 디자인 가이드라인과 주요 화면별 컴포넌트 구조를 정의해 드립니다.
+
+디자인 컨셉은 미쉐린의 권위와 흑백요리사의 트렌디함을 섞은 **'다크 모드 프리미엄(Dark Mode Premium)'**으로 설정했습니다.
+
+🎨 Design System (Style Guide)
+Colors:
+
+Primary: #E62117 (미쉐린 레드 - 열정, 미식)
+
+Accent: #D4AF37 (앤틱 골드 - 전문성, 별, 멤버십)
+
+Background: #121212 (딥 블랙 - 고급스러움, 몰입감)
+
+Surface: #1E1E1E (다크 그레이 - 카드 및 섹션 구분)
+
+Typography:
+
+Headings: Pretendard Bold (신뢰감 있는 고딕)
+
+Body: Pretendard Medium/Regular
+
+Iconography: 두꺼운 라인보다는 세련된 가는 선(Thin line) 스타일의 골드 아이콘.
+
+🖼️ Figma 주요 화면 상세 시안 구조
+화면 1: DNA 테스트 시작 (Onboarding)
+Layout: 중앙 정렬 풀스크린
+
+Component:
+
+Background: 어두운 식당 배경에 은은한 블러(Blur) 처리.
+
+Lottie Animation: 금색 지도 핀이 심장박동처럼 뛰는 애니메이션.
+
+Title: "당신의 미식 DNA는 무엇인가요?"
+
+Button: [나만의 코드 찾기] - 레드 그라데이션 적용, 클릭 시 햅틱 반응.
+
+화면 2: 질문 인터페이스 (The Questionnaire)
+Layout: 카드 스택(Card Stack) 방식 (Tinder처럼 좌우 스와이프)
+
+Component:
+
+Question Card: * 왼쪽(E): "가성비가 최고지!" (시장통 노포 이미지)
+
+오른쪽(P): "경험이 중요해!" (고급 다이닝 이미지)
+
+Indicator: 상단에 P E A T 4개 알파벳이 점수로 채워지는 게이지 바.
+
+Interaction: 스와이프할 때마다 배경색이 미세하게 레드/골드로 변화.
+
+화면 3: 결과 대시보드 (DNA Result)
+Layout: 2단 구성 (상단: 유형 카드 / 하단: 세부 지표)
+
+Component:
+
+DNA Badge: P.C.S.N 글자가 골드 박막 효과(Foil effect)로 반짝임.
+
+Radar Chart: 5각형 방사형 그래프로 맛, 가격, 분위기 등의 밸런스 시각화.
+
+Best Match Menu: "당신을 위한 미슐랭 1스타: [레스토랑 이름]" 텍스트와 사진.
+
+CTA Button: [이 취향으로 지도 시작하기]
+
+화면 4: 맞춤형 메인 지도 (Personalized Map)
+Layout: 전체 지도 뷰 + 하단 플로팅 바
+
+Component:
+
+Custom Pins: * 내 DNA 일치 식당: 골드 테두리가 있는 레드 핀 (중앙에 별 아이콘).
+
+일반 식당: 반투명한 화이트 핀.
+
+Top Search Bar: "내 DNA(P.C.S.N)에 맞는 맛집 검색" 플레이스홀더.
+
+Quick Filter: [흑백요리사], [미슐랭 스타], [예능맛집] 칩(Chip) 버튼 제공.
+
+🚀 Figma 작업 Task List (디자이너 전달용)
+[ ] Asset: 미쉐린 가이드 로고, 흑백요리사 연상 실루엣, 골드 핀 에셋 제작.
+
+[ ] Prototype: 설문 카드 스와이프 인터랙션 및 결과 페이지 전환 효과 구현.
+
+[ ] Components: 버튼(Primary/Secondary), 텍스트 필드, 지도 핀(Active/Inactive) 컴포넌트 세트 제작.
+
+[ ] Dark/Light Mode: 다크 모드 기반으로 하되, 가독성을 위한 명암비 점검.
+
+이 가이드를 바탕으로 실제 피그마 파일의 레이아웃 구조를 이미지로 생성해 드릴까요? 아니면 개발자가 바로 쓸 수 있는 CSS 스타일 시트를 먼저 뽑아드릴까요?
+
+이 가이드를 바탕으로 실제 피그마 파일의 레이아웃 구조를 이미지로 생성해
+
+ 이미지
+
+아니면 개발자가 바로 쓸 수 있는 CSS 스타일 시트를 먼저 뽑아줘
+
+피그마 시안의 '다크 모드 프리미엄' 컨셉을 코드 수준에서 일관되게 구현할 수 있도록, **디자인 토큰(Variables)**과 핵심 컴포넌트에 대한 CSS 스타일 시트를 작성해 드립니다.
+
+이 코드는 최신 CSS 변수를 사용하므로 프로젝트의 글로벌 스타일 파일에 바로 적용하실 수 있습니다.
+
+🎨 1. Global Design Tokens (Variables)
+먼저 앱의 브랜드 정체성을 유지하기 위한 컬러와 폰트 변수를 정의합니다.
+
+CSS
+:root {
+  /* Colors */
+  --primary-red: #E62117;     /* 미쉐린 레드 */
+  --accent-gold: #D4AF37;     /* 앤틱 골드 */
+  --bg-dark: #121212;         /* 딥 블랙 배경 */
+  --surface-dark: #1E1E1E;    /* 카드/섹션 배경 */
+  --text-main: #FFFFFF;
+  --text-sub: #A0A0A0;
+  --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #B4943E 100%);
+  --red-gradient: linear-gradient(135deg, #E62117 0%, #B31912 100%);
+
+  /* Shadows & Radius */
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --border-radius-lg: 16px;
+  --border-radius-sm: 8px;
+}
+🛠️ 2. Core Components CSS
+① DNA 배지 (Result Badge)
+사용자의 성향 코드(P.C.S.N 등)를 강조하는 골드 포일 효과입니다.
+
+CSS
+.dna-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--gold-gradient);
+  border-radius: 4px;
+  color: #121212;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+② 설문 카드 (Question Card)
+스와이프 인터랙션이 들어가는 설문용 카드 스타일입니다.
+
+CSS
+.survey-card {
+  background: var(--surface-dark);
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.survey-card:hover {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+③ 메인 CTA 버튼 (Primary Button)
+사용자의 행동을 유도하는 레드 그라데이션 버튼입니다.
+
+CSS
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: var(--red-gradient);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+④ 지도 맞춤 핀 (Custom Map Pin)
+내 성향과 일치하는 맛집을 강조하는 핀 스타일입니다.
+
+CSS
+.map-pin-special {
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary-red);
+  border: 2px solid var(--accent-gold);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 핀 내부 별 아이콘 */
+.map-pin-special::after {
+  content: '★';
+  color: var(--accent-gold);
+  transform: rotate(45deg);
+  font-size: 14px;
+}
+💡 개발자 참고 사항
+애니메이션: 설문 카드 전환 시 framer-motion 혹은 GSAP을 사용하여 스와이프 애니메이션을 추가하면 훨씬 생동감 있는 UX가 가능합니다.
+
+가독성: 텍스트 가독성을 위해 Pretendard 혹은 Inter 폰트를 임베딩하는 것을 권장합니다.
+
+반응형: 위 코드는 모바일 퍼스트로 작성되었으므로, 태블릿이나 웹 뷰어에서는 max-width 컨테이너를 설정해 주세요.
+
+이 스타일 시트를 기반으로 리액트(React)나 플러터(Flutter)용 컴포넌트 코드를 구체화해 드릴까요? 혹은 지도에 들어갈 커스텀 마커 이미지를 더 제작해 볼까요?
+
+플러터(Flutter)용 컴포넌트 코드를 구체화해줘
+
+플러터(Flutter)로 구현할 [P.E.A.T] 미식 DNA 시스템의 핵심 UI 컴포넌트 코드를 작성해 드립니다. 다크 모드 기반의 프리미엄 디자인 시스템을 반영했으며, 재사용이 가능하도록 구성했습니다.
+
+1. 디자인 토큰 정의 (App Theme)
+먼저 ThemeData에 사용할 컬러와 스타일 상수를 정의합니다.
+
+Dart
+import 'package:flutter/material.dart';
+
+class TastyTheme {
+  static const Color primaryRed = Color(0xFFE62117);
+  static const Color accentGold = Color(0(0xFFD4AF37));
+  static const Color bgDark = Color(0xFF121212);
+  static const Color surfaceDark = Color(0xFF1E1E1E);
+
+  static const LinearGradient goldGradient = LinearGradient(
+    colors: [Color(0xFFD4AF37), Color(0xFFF1D592)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static TextStyle dnaBadgeStyle = const TextStyle(
+    color: bgDark,
+    fontWeight: FontWeight.w900,
+    letterSpacing: 1.2,
+    fontSize: 14,
+  );
+}
+2. DNA 결과 배지 컴포넌트 (DNA Badge)
+유저의 성향 코드(예: P.C.S.N)를 골드 그라데이션 박스로 보여줍니다.
+
+Dart
+class DNABadge extends StatelessWidget {
+  final String code;
+  const DNABadge({required this.code, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        gradient: TastyTheme.goldGradient,
+        borderRadius: BorderRadius.circular(4),
+        boxShadow: [
+          BoxShadow(
+            color: TastyTheme.accentGold.withOpacity(0.3),
+            blurRadius: 8,
+          )
+        ],
+      ),
+      child: Text(code, style: TastyTheme.dnaBadgeStyle),
+    );
+  }
+}
+3. 설문용 이미지 카드 선택기 (Survey Card)
+사용자가 터치하거나 스와이프하여 선택할 수 있는 이미지 카드입니다.
+
+Dart
+class SurveyOptionCard extends StatelessWidget {
+  final String title;
+  final String imageUrl;
+  final VoidCallback onTap;
+  final bool isSelected;
+
+  const SurveyOptionCard({
+    required this.title,
+    required this.imageUrl,
+    required this.onTap,
+    this.isSelected = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: 160,
+        decoration: BoxDecoration(
+          color: TastyTheme.surfaceDark,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected ? TastyTheme.accentGold : Colors.transparent,
+            width: 2,
+          ),
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              child: Image.network(imageUrl, height: 120, fit: BoxFit.cover),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                title,
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+4. 메인 프리미엄 버튼 (CTA Button)
+앱 전반에서 사용할 레드 그라데이션 버튼입니다.
+
+Dart
+class PremiumButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  const PremiumButton({required this.text, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 56,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        gradient: const LinearGradient(
+          colors: [TastyTheme.primaryRed, Color(0xFFB31912)],
+        ),
+      ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+💡 개발 팁
+상태 관리: 유저의 P.E.A.T 점수를 실시간으로 계산하기 위해 Riverpod이나 Provider를 사용하는 것을 추천합니다.
+
+지도 연동: Maps_flutter 패키지를 사용하여 마커 아이콘을 BitmapDescriptor로 커스텀할 때, 위 accentGold 색상을 입힌 핀 이미지를 에셋으로 사용하세요.
+
+이 컴포넌트들을 조합하여 **실제 설문 페이지의 전체 소스 코드(Full Page Code)**를 작성해 드릴까요? 혹은 지도 위에 뿌려질 커스텀 데이터 모델(JSON) 구조를 설계해 드릴까요?
+
+ **실제 설문 페이지의 전체 소스 코드(Full Page Code)**를 작성해줘
+
+플러터(Flutter)에서 즉시 실행 가능한 미식 DNA 테스트(P.E.A.T Survey) 설문 페이지 전체 소스 코드입니다.
+
+사용자가 선택지를 클릭할 때마다 부드러운 애니메이션 효과를 주며, 4가지 지표(Price, Energy, Authority, Taste)를 점수화하여 결과 페이지로 넘겨주는 로직까지 포함되어 있습니다.
+
+🚀 TastyMap Survey Page Full Code
+Dart
+import 'package:flutter/material.dart';
+
+// 디자인 테마 설정
+class TastyTheme {
+  static const Color primaryRed = Color(0xFFE62117);
+  static const Color accentGold = Color(0xFFD4AF37);
+  static const Color bgDark = Color(0xFF121212);
+  static const Color surfaceDark = Color(0xFF1E1E1E);
+}
+
+void main() => runApp(MaterialApp(
+      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: TastyTheme.bgDark),
+      home: const SurveyPage(),
+    ));
+
+class SurveyPage extends StatefulWidget {
+  const SurveyPage({super.key});
+
+  @override
+  State<SurveyPage> createState() => _SurveyPageState();
+}
+
+class _SurveyPageState extends State<SurveyPage> {
+  int _currentStep = 0;
+  
+  // 지표별 점수 (P, E, A, T)
+  final Map<String, double> _scores = {'P': 0, 'E': 0, 'A': 0, 'T': 0};
+
+  // 설문 데이터 구성
+  final List<Map<String, dynamic>> _questions = [
+    {
+      'dimension': 'P',
+      'question': '기념일 저녁, 당신의 선택은?',
+      'options': [
+        {'text': '가격 상관없이 최고급 다이닝', 'value': 1.0, 'img': 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400'},
+        {'text': '합리적인 가격의 빕 구르망', 'value': -1.0, 'img': 'https://images.unsplash.com/photo-1552611052-33e04de081de?w=400'},
+      ]
+    },
+    {
+      'dimension': 'E',
+      'question': '선호하는 식당의 분위기는?',
+      'options': [
+        {'text': '고요하고 프라이빗한 공간', 'value': 1.0, 'img': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400'},
+        {'text': '활기차고 시끌벅적한 노포', 'value': -1.0, 'img': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400'},
+      ]
+    },
+    {
+      'dimension': 'A',
+      'question': '맛집을 고르는 기준은?',
+      'options': [
+        {'text': '미쉐린 등 전문가의 검증', 'value': 1.0, 'img': 'https://images.unsplash.com/photo-1581349485608-9469926a8e5e?w=400'},
+        {'text': 'TV 예능이나 SNS 핫플', 'value': -1.0, 'img': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400'},
+      ]
+    },
+    {
+      'dimension': 'T',
+      'question': '오늘 끌리는 요리 스타일은?',
+      'options': [
+        {'text': '전통을 지킨 원조의 맛', 'value': 1.0, 'img': 'https://images.unsplash.com/photo-1547592166-23ac45744a05?w=400'},
+        {'text': '셰프의 창의적인 퓨전 요리', 'value': -1.0, 'img': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400'},
+      ]
+    },
+  ];
+
+  void _handleAnswer(double value) {
+    setState(() {
+      String dim = _questions[_currentStep]['dimension'];
+      _scores[dim] = value;
+      
+      if (_currentStep < _questions.length - 1) {
+        _currentStep++;
+      } else {
+        _showResult();
+      }
+    });
+  }
+
+  void _showResult() {
+    // 결과 코드 계산 (양수면 앞글자, 음수면 뒷글자 성향)
+    String resP = _scores['P']! > 0 ? 'P' : 'E';
+    String resE = _scores['E']! > 0 ? 'C' : 'V';
+    String resA = _scores['A']! > 0 ? 'S' : 'H';
+    String resT = _scores['T']! > 0 ? 'C' : 'N';
+    String finalCode = "$resP.$resE.$resA.$resT";
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: TastyTheme.surfaceDark,
+        title: const Text("미식 DNA 분석 완료!", textAlign: TextAlign.center),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text("당신의 유형은:"),
+            const SizedBox(height: 10),
+            Text(finalCode, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: TastyTheme.accentGold)),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text("지도 확인하기", style: TextStyle(color: TastyTheme.primaryRed)))
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var q = _questions[_currentStep];
+    
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text("질문 ${_currentStep + 1} / ${_questions.length}", style: const TextStyle(color: TastyTheme.accentGold)),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const LinearProgressIndicator(
+              value: 0.25 * 1, // 단계별로 조절 가능
+              backgroundColor: TastyTheme.surfaceDark,
+              color: TastyTheme.primaryRed,
+            ),
+            const SizedBox(height: 40),
+            Text(q['question'], style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+            const SizedBox(height: 40),
+            Expanded(
+              child: ListView.separated(
+                itemCount: 2,
+                separatorBuilder: (context, index) => const SizedBox(height: 20),
+                itemBuilder: (context, index) {
+                  var opt = q['options'][index];
+                  return GestureDetector(
+                    onTap: () => _handleAnswer(opt['value']),
+                    child: Container(
+                      height: 180,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: NetworkImage(opt['img']),
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.darken),
+                        ),
+                        border: Border.all(color: Colors.white10, width: 1),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        opt['text'],
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+🛠️ 코드 하이라이트
+동적 상태 관리: _scores 맵을 통해 사용자의 선택을 실시간으로 기록하고, 마지막 질문 후에 finalCode를 생성합니다.
+
+프리미엄 UI: Unsplash 이미지를 배경으로 활용하고 다크 모드 오버레이를 씌워 고급스러운 다이닝 앱의 느낌을 구현했습니다.
+
+확장성: _questions 리스트에 질문을 추가하는 것만으로 설문 길이를 자유롭게 조절할 수 있습니다.
+
+이 코드를 실제 프로젝트에 적용하시겠습니까? 아니면 결과 페이지에서 보여줄 레이더 차트(성향 그래프) 위젯을 추가로 구현해 드릴까요?

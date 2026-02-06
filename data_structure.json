@@ -1,0 +1,50 @@
+{
+  "total_records": 15456,
+  "columns": [
+    "no",
+    "media_type",
+    "title",
+    "place_name",
+    "place_type",
+    "description",
+    "opening_hours",
+    "break_time",
+    "closed_days",
+    "address",
+    "latitude",
+    "longitude",
+    "phone",
+    "last_updated"
+  ],
+  "media_types": [
+    "drama",
+    "guide",
+    "blackwhite",
+    "movie",
+    "artist",
+    "show"
+  ],
+  "place_types": [
+    "building",
+    "station",
+    "cafe",
+    "restaurant",
+    "shop",
+    "playground",
+    "store",
+    "street",
+    "park",
+    "cvs",
+    "stay",
+    "stay "
+  ],
+  "date_range": {
+    "start": "2022-11-18",
+    "end": "2026-01-29"
+  },
+  "coordinate_coverage": {
+    "total": 15456,
+    "with_coords": 15418,
+    "coverage_percent": 99.75414078674947
+  }
+}
