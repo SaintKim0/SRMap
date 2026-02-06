@@ -17,6 +17,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location(
   contentTitle: json['contentTitle'] as String?,
   contentReleaseYear: (json['contentReleaseYear'] as num?)?.toInt(),
   michelinTier: json['michelinTier'] as String?,
+  chefName: json['chefName'] as String?,
   phoneNumber: json['phoneNumber'] as String?,
   website: json['website'] as String?,
   openingHours: json['openingHours'] as String?,
@@ -54,6 +55,7 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
   'contentTitle': instance.contentTitle,
   'contentReleaseYear': instance.contentReleaseYear,
   'michelinTier': instance.michelinTier,
+  'chefName': instance.chefName,
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': instance.updatedAt?.toIso8601String(),
 };

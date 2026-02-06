@@ -104,6 +104,27 @@ class LocationCard extends StatelessWidget {
                           ),
                         ],
                       ),
+                      if (location.chefName != null && location.mediaType?.toLowerCase() == 'blackwhite') ...[
+                        SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
+                        Row(
+                          children: [
+                            Icon(Icons.person, size: iconSize, color: const Color(0xFF2C2C2C)),
+                            SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                location.chefName!,
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: const Color(0xFF2C2C2C),
+                                  fontSize: addressFontSize,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                       SizedBox(height: screenWidth < 360 ? 6.0 : 8.0),
                       Row(
                         children: [
@@ -233,6 +254,25 @@ class LocationCard extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
+                        if (location.chefName != null && location.mediaType?.toLowerCase() == 'blackwhite') ...[
+                          SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
+                          Row(
+                            children: [
+                              Icon(Icons.person, size: iconSize, color: const Color(0xFF2C2C2C)),
+                              SizedBox(width: 4),
+                              Text(
+                                location.chefName!,
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: const Color(0xFF2C2C2C),
+                                  fontSize: addressFontSize,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ],
                         SizedBox(height: screenWidth < 360 ? 6.0 : 8.0),
                         Row(
                           children: [

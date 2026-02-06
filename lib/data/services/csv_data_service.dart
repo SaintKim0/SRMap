@@ -180,6 +180,15 @@ class CsvDataService {
             }
           }
 
+          // Extract chef name from column 5 for blackwhite media type
+          String? chefName;
+          if (normalizedMediaType == 'blackwhite') {
+            final chefNameRaw = descRaw.trim();
+            if (chefNameRaw.isNotEmpty && chefNameRaw != 'null' && chefNameRaw != '정보없음') {
+              chefName = chefNameRaw;
+            }
+          }
+
           locations.add(Location(
             id: 'csv_${row[0]}', 
             name: placeName,
@@ -191,6 +200,7 @@ class CsvDataService {
             contentTitle: title,
             contentReleaseYear: null,
             michelinTier: michelinTier,
+            chefName: chefName,
             phoneNumber: phone == 'null' || phone.isEmpty ? null : phone,
             openingHours: combinedHours == 'null' || combinedHours.isEmpty ? null : combinedHours,
             imageUrls: finalImageUrls,

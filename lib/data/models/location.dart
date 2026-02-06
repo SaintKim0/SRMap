@@ -26,6 +26,8 @@ class Location extends Equatable {
   final int? contentReleaseYear;
   /// 미슐랭 등급 (3 Star, 2 Star, 1 Star, 빕구르망, michelin 등)
   final String? michelinTier;
+  /// 셰프 이름 또는 별명 (흑백요리사 등)
+  final String? chefName;
   final DateTime createdAt;
   final DateTime? updatedAt;
 
@@ -40,6 +42,7 @@ class Location extends Equatable {
     this.contentTitle,
     this.contentReleaseYear,
     this.michelinTier,
+    this.chefName,
     this.phoneNumber,
     this.website,
     this.openingHours,
@@ -76,6 +79,7 @@ class Location extends Equatable {
     int? bookmarkCount,
     String? description,
     String? michelinTier,
+    String? chefName,
     DateTime? updatedAt,
   }) {
     return Location(
@@ -89,6 +93,7 @@ class Location extends Equatable {
       contentTitle: contentTitle ?? this.contentTitle,
       contentReleaseYear: contentReleaseYear ?? this.contentReleaseYear,
       michelinTier: michelinTier ?? this.michelinTier,
+      chefName: chefName ?? this.chefName,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       website: website ?? this.website,
       openingHours: openingHours ?? this.openingHours,

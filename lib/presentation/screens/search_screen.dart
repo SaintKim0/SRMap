@@ -141,18 +141,32 @@ class _SearchScreenState extends State<SearchScreen> {
     }
 
     // Sort by distance if we have a reference position (Geographic Search priority)
+    // OR if we have current location
+    final locProvService = context.read<LocationProvider>();
+    final dataProvider = context.read<LocationDataProvider>();
+    
+    double? refLat;
+    double? refLng;
+
     if (_referencePosition != null) {
-      final dataProvider = context.read<LocationDataProvider>();
+      refLat = _referencePosition!.latitude;
+      refLng = _referencePosition!.longitude;
+    } else if (locProvService.hasLocation) {
+      refLat = locProvService.currentPosition!.latitude;
+      refLng = locProvService.currentPosition!.longitude;
+    }
+
+    if (refLat != null && refLng != null) {
       results.sort((a, b) {
         final distA = dataProvider.calculateDistanceBetween(
-          _referencePosition!.latitude, 
-          _referencePosition!.longitude, 
+          refLat!, 
+          refLng!, 
           a.latitude, 
           a.longitude
         );
         final distB = dataProvider.calculateDistanceBetween(
-          _referencePosition!.latitude, 
-          _referencePosition!.longitude, 
+          refLat, 
+          refLng, 
           b.latitude, 
           b.longitude
         );
@@ -367,8 +381,39 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget _buildSearchResults() {
     if (_searchResults.isEmpty) {
+      // Check if we have results before distance filtering
+      String message = '검색 결과가 없습니다';
+      
+      if (_totalMatchCount > 0 && _selectedDistance != null) {
+        // Results exist but filtered out by distance
+        String sectorInfo = '';
+        if (_selectedSectorFilters.isNotEmpty) {
+          // Get sector names
+          List<String> sectorNames = [];
+          for (var filter in _selectedSectorFilters) {
+            if (filter['type'] == 'bw') {
+              if (filter['value'] == 'season1') {
+                sectorNames.add('흑백요리사 시즌1');
+              } else if (filter['value'] == 'season2') {
+                sectorNames.add('흑백요리사 시즌2');
+              } else {
+                sectorNames.add('흑백요리사');
+              }
+            } else if (filter['type'] == 'show') {
+              sectorNames.add('예능출연 맛집');
+            } else if (filter['type'] == 'michelin') {
+              sectorNames.add('미슐랭');
+            }
+          }
+          if (sectorNames.isNotEmpty) {
+            sectorInfo = '(${sectorNames.join(', ')}의 맛집)';
+          }
+        }
+        message = '해당 거리 내에 $sectorInfo${sectorInfo.isEmpty ? '맛집이' : ''} 없습니다.';
+      }
+      
       return EmptyState(
-        message: '검색 결과가 없습니다',
+        message: message,
         icon: Icons.search_off,
         action: ElevatedButton(
           onPressed: _clearSearch,

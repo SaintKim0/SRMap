@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
       mediaType = 'blackwhite';
     } else if (sector == '미슐렝 코리아') {
       mediaType = 'guide';
-      displaySectorName = '미슐렝'; // UI 표시용
+      displaySectorName = '미슐랭'; // UI 표시용
     } else if (sector == '예능 촬영 맛집') {
       mediaType = 'show';
       displaySectorName = '예능'; // UI 표시용
@@ -349,7 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: _buildSectorButton(
                                   context,
                                   '미슐렝 코리아',
-                                  '미슐렝',
+                                  '미슐랭',
                                   '미슐렝 코리아',
                                   provider.selectedSector == '미슐렝 코리아',
                                   () => _onSectorTapped(context, provider, '미슐렝 코리아'),
@@ -745,7 +745,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// 앱 안내 카드 — 마이페이지 카드 스타일 통일, 접기/펼치기
   Widget _buildAppIntroCard(BuildContext context) {
-    const oneLiner = '흑백요리사, 미슐렝, 예능에 나온 맛집을 한곳에서.';
+    const oneLiner = '흑백요리사, 미슐랭, 예능에 나온 맛집을 한곳에서.';
     final points = [
       '프로그램·가이드별로 맛집 보기',
       '지도에서 위치 확인 후 길찾기',
