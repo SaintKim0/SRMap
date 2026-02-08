@@ -99,7 +99,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                 ),
                 SizedBox(width: AppSpacing.spacingS(context)),
                 IconButton(
-                  icon: Icon(Icons.edit, size: 20, color: Colors.grey[600]),
+                  icon: Icon(Icons.edit, size: 20, color: Theme.of(context).iconTheme.color),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -143,7 +143,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                 Text(
                   user.statusMessage ?? '나만의 맛 지도를 만들어보세요!',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.grey[600],
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
                   ),
                 ),
               ],
@@ -162,11 +162,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
         return Container(
           padding: EdgeInsets.symmetric(vertical: cardP.top),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(radius),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Theme.of(context).shadowColor.withOpacity(0.1),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -198,7 +198,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
         Text(
           label,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.grey[600],
+            color: Theme.of(context).textTheme.bodySmall?.color,
           ),
         ),
       ],
@@ -209,7 +209,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
     return Container(
       height: 30,
       width: 1,
-      color: Colors.grey[300],
+      color: Theme.of(context).dividerColor,
     );
   }
 
@@ -227,11 +227,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
           width: double.infinity,
           padding: cardP,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(radius),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Theme.of(context).shadowColor.withOpacity(0.1),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -257,7 +257,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                 Text(
                   '달성 뱃지',
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Colors.grey[600],
+                    color: Theme.of(context).textTheme.bodySmall?.color,
                   ),
                 ),
                 SizedBox(height: spacingSVal),
@@ -361,9 +361,13 @@ class _MyPageScreenState extends State<MyPageScreen> {
     return Container(
       margin: EdgeInsets.only(bottom: AppSpacing.spacingM(context)),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(radius),
-        border: Border.all(color: Colors.grey[200]!),
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark 
+              ? Colors.white12 
+              : Colors.grey[200]!,
+        ),
       ),
       child: ListTile(
         leading: Container(
@@ -378,7 +382,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
           title,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
         ),
-        trailing: Icon(Icons.chevron_right, color: Colors.grey[400], size: AppSpacing.iconSizeM(context)),
+        trailing: Icon(
+          Icons.chevron_right, 
+          color: Theme.of(context).iconTheme.color?.withOpacity(0.5) ?? Colors.grey[400],
+          size: AppSpacing.iconSizeM(context)
+        ),
         onTap: onTap,
       ),
     );

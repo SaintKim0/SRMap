@@ -239,47 +239,59 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          height: 40,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: TextField(
-            controller: _searchController,
-            autofocus: false,
-            style: const TextStyle(color: Colors.black87, fontSize: 14),
-            textAlignVertical: TextAlignVertical.center,
-            decoration: InputDecoration(
-              hintText: '지역 검색',
-              hintStyle: TextStyle(color: Colors.grey[600], fontSize: 14),
-              border: InputBorder.none,
-              isDense: true,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-              prefixIcon: const Icon(Icons.search, size: 20, color: Colors.grey),
-              suffixIcon: _searchController.text.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear, size: 18, color: Colors.grey),
-                      onPressed: _clearSearch,
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                    )
-                  : null,
+        toolbarHeight: 70, // Reduced height
+        title: Padding(
+          padding: const EdgeInsets.only(top: 10.0), // Reduced top padding
+          child: Text(
+            "내 주변을 검색해 보세요 (복수선택 가능!)",
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 14, // Smaller font
+              color: Colors.white,
             ),
-            onSubmitted: (val) => _performSearch(val, saveToRecent: true),
-            onChanged: _onSearchChanged,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () => _performSearch(_searchController.text, saveToRecent: true),
-          ),
-        ],
+        centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(210),
+          preferredSize: const Size.fromHeight(240),
           child: Column(
             children: [
+              // Search Bar Moved Here
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                child: Container(
+                  height: 32, // Significantly reduced height (closer to "50%" feel vs original large ones)
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16), // Adjusted radius
+                  ),
+                  child: TextField(
+                    controller: _searchController,
+                    autofocus: false,
+                    style: const TextStyle(color: Colors.black87, fontSize: 13), // Smaller font
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                      hintText: '지역 검색 (예: 강남구, 부산)',
+                      hintStyle: TextStyle(color: Colors.grey[600], fontSize: 13), // Smaller hint
+                      border: InputBorder.none,
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Adjusted padding
+                      prefixIcon: const Icon(Icons.search, size: 18, color: Colors.grey), // Smaller icon
+                      suffixIcon: _searchController.text.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.clear, size: 16, color: Colors.grey),
+                              onPressed: _clearSearch,
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                            )
+                          : null,
+                    ),
+                    onSubmitted: (val) => _performSearch(val, saveToRecent: true),
+                    onChanged: _onSearchChanged,
+                  ),
+                ),
+              ),
+              
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(

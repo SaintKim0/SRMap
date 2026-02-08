@@ -29,6 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
   
   // Radius Filter
   double _selectedRadius = 5.0; // Default 5km
+  
+  // Entertainment Search
+  String _workSearchQuery = '';
 
   bool _showTopButton = false;
   bool _nearCheckScheduled = false;
@@ -1103,8 +1106,8 @@ class _HomeScreenState extends State<HomeScreen> {
     BuildContext context,
     LocationDataProvider provider,
   ) {
-    final works = provider.contentTitles;
-    if (works.isEmpty) {
+    final allWorks = provider.contentTitles;
+    if (allWorks.isEmpty) {
       return Padding(
         padding: EdgeInsets.all(AppSpacing.spacingL(context)),
         child: const EmptyState(
@@ -1112,6 +1115,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     }
+
+    final filteredWorks = _workSearchQuery.isEmpty
+        ? allWorks
+        : allWorks.where((w) => w.toLowerCase().contains(_workSearchQuery.toLowerCase())).toList();
 
     final titleFontSize = AppSpacing.titleFontSize(context);
     final addressFontSize = titleFontSize * 0.8;
@@ -1125,21 +1132,75 @@ class _HomeScreenState extends State<HomeScreen> {
           context,
           '${provider.selectedSector} ${provider.selectedSubSector ?? ""}'.trim(),
         ),
+        
+        // Search Bar
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPaddingHorizontal(context)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (int i = 0; i < works.length; i++) ...[
-                _buildWorkCard(
-                  context,
-                  provider,
-                  works[i],
-                  titleFontSize,
+          padding: EdgeInsets.fromLTRB(
+            AppSpacing.screenPaddingHorizontal(context),
+            0,
+            AppSpacing.screenPaddingHorizontal(context),
+            AppSpacing.spacingM(context),
+          ),
+          child: TextField(
+            style: Theme.of(context).textTheme.bodyMedium,
+            decoration: InputDecoration(
+              hintText: '프로그램 검색 (예: 생생정보통)',
+              hintStyle: TextStyle(color: Theme.of(context).textTheme.bodySmall?.color),
+              prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
+              filled: true,
+              fillColor: Theme.of(context).cardColor,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: Theme.of(context).brightness == Brightness.dark 
+                      ? Colors.white12 
+                      : Colors.grey.withOpacity(0.2),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              ),
+            ),
+            onChanged: (value) {
+              setState(() {
+                _workSearchQuery = value;
+              });
+            },
+          ),
+        ),
+
+        if (filteredWorks.isEmpty)
+           Padding(
+             padding: const EdgeInsets.all(32),
+             child: Center(
+               child: Text(
+                 '"$_workSearchQuery" 검색 결과가 없습니다.',
+                 style: Theme.of(context).textTheme.bodyMedium,
+               ),
+             ),
+           )
+        else
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPaddingHorizontal(context)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (int i = 0; i < filteredWorks.length; i++) ...[
+                  _buildWorkCard(
+                    context,
+                    provider,
+                    filteredWorks[i],
+                    titleFontSize,
                   addressFontSize,
                   iconSize,
                 ),
-                  if (provider.expandedContentTitle == works[i]) ...[
+                  if (provider.expandedContentTitle == filteredWorks[i]) ...[
                     SizedBox(height: AppSpacing.spacingS(context)),
                     _buildKmdbWorkInfo(context, provider),
                     
@@ -1282,8 +1343,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => LocationListScreen(
-                                              title: works[i],
-                                              contentTitle: works[i],
+                                              title: filteredWorks[i],
+                                              contentTitle: filteredWorks[i],
                                               maxDistance: _selectedRadius == 99999.0 ? null : _selectedRadius,
                                             ),
                                           ),
@@ -1330,17 +1391,21 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: EdgeInsets.only(bottom: AppSpacing.spacingS(context)),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(cardRadius),
           border: Border.all(
             color: isExpanded
-                ? Theme.of(context).primaryColor.withOpacity(0.5)
-                : Colors.grey.withOpacity(0.2),
+                ? (Theme.of(context).brightness == Brightness.dark 
+                    ? const Color(0xFF6BA3C7) 
+                    : Theme.of(context).primaryColor.withOpacity(0.5))
+                : (Theme.of(context).brightness == Brightness.dark 
+                    ? Colors.white12 
+                    : Colors.grey.withOpacity(0.2)),
             width: isExpanded ? 2 : 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Theme.of(context).shadowColor.withOpacity(0.1),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -1359,10 +1424,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: boxSize,
                     height: boxSize,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.15),
+                      color: Theme.of(context).brightness == Brightness.dark 
+                          ? Colors.white10 
+                          : Theme.of(context).primaryColor.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(boxRadius),
                     ),
-                    child: Icon(iconData, size: boxSize * 0.5, color: Theme.of(context).primaryColor),
+                    child: Icon(
+                      iconData, 
+                      size: boxSize * 0.5, 
+                      color: Theme.of(context).brightness == Brightness.dark 
+                          ? const Color(0xFF6BA3C7) 
+                          : Theme.of(context).primaryColor
+                    ),
                   ),
                   SizedBox(width: AppSpacing.spacingM(context)),
                   Expanded(
@@ -1380,7 +1453,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     fontSize: titleFontSize,
-                                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                                    color: Theme.of(context).textTheme.titleSmall?.color,
                                   ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -1392,7 +1465,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               '(${provider.contentTitleYears[contentTitle]})',
                               style: TextStyle(
                                 fontSize: addressFontSize,
-                                color: Colors.grey[600],
+                                color: Theme.of(context).textTheme.bodySmall?.color,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -1402,7 +1475,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(height: AppSpacing.spacingXS(context)),
                       Row(
                         children: [
-                          Icon(Icons.location_on, size: iconSize, color: Colors.grey[600]),
+                          Icon(Icons.location_on, size: iconSize, color: Theme.of(context).iconTheme.color),
                           SizedBox(width: AppSpacing.spacingXS(context)),
                           Text(
                             isExpanded
@@ -1410,7 +1483,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : '맛집 ${provider.contentTitleCounts[contentTitle] ?? 0}개',
                             style: TextStyle(
                               fontSize: addressFontSize,
-                              color: Colors.grey[600],
+                              color: Theme.of(context).textTheme.bodySmall?.color,
                             ),
                           ),
                         ],
@@ -1420,7 +1493,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Icon(
                     isExpanded ? Icons.expand_less : Icons.expand_more,
-                    color: Colors.grey[600],
+                    color: Theme.of(context).iconTheme.color,
                   ),
                 ],
               ),
@@ -1470,12 +1543,16 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         padding: cardP,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(radius),
-          border: Border.all(color: Colors.grey.withOpacity(0.2)),
+          border: Border.all(
+            color: Theme.of(context).brightness == Brightness.dark 
+                ? Colors.white12 
+                : Colors.grey.withOpacity(0.2)
+          ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Theme.of(context).shadowColor.withOpacity(0.1),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -1515,7 +1592,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   info.plot!,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontSize: fontSize - 1,
-                        color: Colors.grey[700],
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                         height: 1.4,
                       ),
                   maxLines: 4,
@@ -1527,7 +1604,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(
                   '출처: 한국영화데이터베이스(KMDb)',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Colors.grey[600],
+                        color: Theme.of(context).textTheme.bodySmall?.color,
                         fontSize: fontSize - 2,
                       ),
                 ),
@@ -1551,7 +1628,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w600,
                     fontSize: fontSize,
-                    color: Colors.grey[700],
+                    color: Theme.of(context).textTheme.bodySmall?.color,
                   ),
             ),
           ),

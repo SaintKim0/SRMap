@@ -145,6 +145,13 @@ class AppTheme {
         ),
       ),
     ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: primaryColor,
+      unselectedItemColor: Colors.grey,
+      type: BottomNavigationBarType.fixed,
+      elevation: 8,
+    ),
   );
   
   // Dark Theme
@@ -195,5 +202,12 @@ class AppTheme {
       color: Color(0xFFBDBDBD),
     ),
     dividerColor: Colors.white24,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Color(0xFF1E1E1E), // Dark Grey Surface
+      selectedItemColor: secondaryColor,
+      unselectedItemColor: Colors.grey,
+      type: BottomNavigationBarType.fixed,
+      elevation: 8,
+    ),
   );
 }
