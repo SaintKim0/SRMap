@@ -5,6 +5,7 @@ import '../../data/services/preferences_service.dart';
 import '../../data/services/nearby_notification_service.dart';
 import '../providers/bottom_navigation_provider.dart';
 import '../providers/location_provider.dart';
+import '../providers/theme_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -63,13 +64,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             leading: const Icon(Icons.brightness_6),
             title: const Text('테마 설정'),
-            subtitle: const Text('시스템 기본값'),
+            subtitle: Consumer<ThemeProvider>(
+              builder: (context, provider, child) {
+                switch (provider.themeMode) {
+                  case ThemeMode.system:
+                    return const Text('시스템 기본값');
+                  case ThemeMode.light:
+                    return const Text('라이트 모드');
+                  case ThemeMode.dark:
+                    return const Text('다크 모드');
+                }
+              },
+            ),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('테마 설정은 준비 중입니다.')),
-              );
-            },
+            onTap: () => _showThemePicker(context),
           ),
           const Divider(),
           _buildSectionHeader(context, '정보'),
@@ -144,6 +152,62 @@ class _SettingsScreenState extends State<SettingsScreen> {
       await _prefs.setNotificationRadiusMeters(chosen);
       _refresh();
     }
+  }
+
+  Future<void> _showThemePicker(BuildContext context) async {
+    final themeProvider = context.read<ThemeProvider>();
+    final currentTheme = themeProvider.themeMode;
+
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('테마 설정'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RadioListTile<ThemeMode>(
+              title: const Text('시스템 설정 따름'),
+              value: ThemeMode.system,
+              groupValue: currentTheme,
+              onChanged: (value) {
+                if (value != null) {
+                  themeProvider.setThemeMode(value);
+                  Navigator.pop(context);
+                }
+              },
+            ),
+            RadioListTile<ThemeMode>(
+              title: const Text('라이트 모드'),
+              value: ThemeMode.light,
+              groupValue: currentTheme,
+              onChanged: (value) {
+                if (value != null) {
+                  themeProvider.setThemeMode(value);
+                  Navigator.pop(context);
+                }
+              },
+            ),
+            RadioListTile<ThemeMode>(
+              title: const Text('다크 모드'),
+              value: ThemeMode.dark,
+              groupValue: currentTheme,
+              onChanged: (value) {
+                if (value != null) {
+                  themeProvider.setThemeMode(value);
+                  Navigator.pop(context);
+                }
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('취소'),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildSectionHeader(BuildContext context, String title) {

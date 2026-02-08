@@ -29,7 +29,7 @@ class LocationCard extends StatelessWidget {
   Widget _buildVerticalCard(BuildContext context) {
     return Card(
       elevation: 8,
-      color: const Color(0xFFF5F3F0), // Cloud Dancer
+      color: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
@@ -37,7 +37,7 @@ class LocationCard extends StatelessWidget {
           width: 1,
         ),
       ),
-      shadowColor: Colors.black.withOpacity(0.25),
+      shadowColor: Theme.of(context).shadowColor.withOpacity(0.25),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
@@ -82,39 +82,21 @@ class LocationCard extends StatelessWidget {
                           ),
                           if (_getSectorLabel() != null) ...[
                             const SizedBox(width: 4),
-                            _buildSectorTag(context, _getSectorLabel()!, _getSectorColor()!, titleFontSize * 0.7),
+                            _buildSectorTag(context, _getSectorLabel()!, _getSectorColorForContext(context)!, titleFontSize * 0.7),
                           ],
                         ],
                       ),
                       SizedBox(height: screenWidth < 360 ? 3.0 : 4.0),
-                      Row(
-                        children: [
-                          Icon(Icons.location_on, size: iconSize, color: Colors.grey[700]),
-                          SizedBox(width: 4),
-                          Expanded(
-                            child: Text(
-                              location.address,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.grey[700],
-                                fontSize: addressFontSize,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
                       if (location.chefName != null && location.mediaType?.toLowerCase() == 'blackwhite') ...[
-                        SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
                         Row(
                           children: [
-                            Icon(Icons.person, size: iconSize, color: const Color(0xFF2C2C2C)),
+                            Icon(Icons.person, size: iconSize, color: Theme.of(context).iconTheme.color),
                             SizedBox(width: 4),
                             Expanded(
                               child: Text(
-                                location.chefName!,
+                                '세프: ${location.chefName}',
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: const Color(0xFF2C2C2C),
+                                  color: Theme.of(context).textTheme.bodyMedium?.color,
                                   fontSize: addressFontSize,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -124,7 +106,25 @@ class LocationCard extends StatelessWidget {
                             ),
                           ],
                         ),
+                        SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
                       ],
+                      Row(
+                        children: [
+                          Icon(Icons.location_on, size: iconSize, color: Theme.of(context).iconTheme.color),
+                          SizedBox(width: 4),
+                          Expanded(
+                            child: Text(
+                              location.address,
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: Theme.of(context).textTheme.bodySmall?.color,
+                                fontSize: addressFontSize,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(height: screenWidth < 360 ? 6.0 : 8.0),
                       Row(
                         children: [
@@ -168,7 +168,7 @@ class LocationCard extends StatelessWidget {
   Widget _buildHorizontalCard(BuildContext context) {
     return Card(
       elevation: 8,
-      color: const Color(0xFFF5F3F0), // Cloud Dancer
+      color: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
@@ -176,7 +176,7 @@ class LocationCard extends StatelessWidget {
           width: 1,
         ),
       ),
-      shadowColor: Colors.black.withOpacity(0.25),
+      shadowColor: Theme.of(context).shadowColor.withOpacity(0.25),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
@@ -228,14 +228,14 @@ class LocationCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 if (_getSectorLabel() != null)
-                                  _buildSectorTag(context, _getSectorLabel()!, _getSectorColor()!, titleFontSize * 0.7),
+                                  _buildSectorTag(context, _getSectorLabel()!, _getSectorColorForContext(context)!, titleFontSize * 0.7),
                                 if (distance != null) ...[
                                   const SizedBox(height: 2),
                                   Text(
                                     distance!,
                                     style: TextStyle(
                                       fontSize: titleFontSize * 0.7,
-                                      color: Colors.grey[600],
+                                      color: Theme.of(context).textTheme.bodySmall?.color,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -245,34 +245,36 @@ class LocationCard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: screenWidth < 360 ? 3.0 : 4.0),
+                        if (location.chefName != null && location.mediaType?.toLowerCase() == 'blackwhite') ...[
+                          Row(
+                            children: [
+                              Icon(Icons.person, size: iconSize, color: Theme.of(context).iconTheme.color),
+                              SizedBox(width: 4),
+                              Expanded(
+                                child: Text(
+                                  '세프: ${location.chefName}',
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Theme.of(context).textTheme.bodySmall?.color,
+                                    fontSize: addressFontSize,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
+                        ],
                         Text(
                           location.address,
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.grey[700],
+                            color: Theme.of(context).textTheme.bodySmall?.color,
                             fontSize: addressFontSize,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        if (location.chefName != null && location.mediaType?.toLowerCase() == 'blackwhite') ...[
-                          SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
-                          Row(
-                            children: [
-                              Icon(Icons.person, size: iconSize, color: const Color(0xFF2C2C2C)),
-                              SizedBox(width: 4),
-                              Text(
-                                location.chefName!,
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: const Color(0xFF2C2C2C),
-                                  fontSize: addressFontSize,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        ],
                         SizedBox(height: screenWidth < 360 ? 6.0 : 8.0),
                         Row(
                           children: [
@@ -303,13 +305,13 @@ class LocationCard extends StatelessWidget {
         Icon(
           icon,
           size: finalIconSize,
-          color: Colors.grey[700],
+          color: Theme.of(context).iconTheme.color,
         ),
         SizedBox(width: screenWidth < 360 ? 3.0 : 4.0),
         Text(
           text,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Colors.grey[700],
+            color: Theme.of(context).textTheme.bodySmall?.color,
             fontSize: finalFontSize,
           ),
         ),
@@ -497,8 +499,25 @@ class LocationCard extends StatelessWidget {
   Color _getSectorColor() {
     final mediaType = location.mediaType?.toLowerCase();
     if (mediaType == 'guide') return const Color(0xFFB71C1C); // Michelin Red
-    if (mediaType == 'blackwhite') return const Color(0xFF2C2C2C); // B&W Dark Grey
+    if (mediaType == 'blackwhite') {
+        // In dark mode, dark grey is invisible. Use White or Light Grey.
+        // We can't access context here easily without changing signature.
+        // But we can check if we want to return a fixed color that works on both or distinct?
+        // Let's use a color that works on both or rely on the caller to adjust opacity.
+        // Actually, 0xFF2C2C2C is very dark. 
+        // Let's return a slightly lighter grey that might work, or we should pass context.
+        return const Color(0xFF424242); // Slightly lighter grey, but still might be dark on dark bg.
+    } 
     if (mediaType == 'show' || mediaType == 'artist') return const Color(0xFF6A1B9A); // TV Purple
     return Colors.grey;
+  }
+
+  Color _getSectorColorForContext(BuildContext context) {
+      final mediaType = location.mediaType?.toLowerCase();
+      final isDark = Theme.of(context).brightness == Brightness.dark;
+      if (mediaType == 'blackwhite') {
+          return isDark ? Colors.white70 : const Color(0xFF2C2C2C);
+      }
+      return _getSectorColor();
   }
 }

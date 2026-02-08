@@ -9,6 +9,7 @@ import 'presentation/providers/bookmark_provider.dart';
 import 'presentation/providers/visited_provider.dart';
 import 'presentation/providers/recent_viewed_provider.dart';
 import 'presentation/providers/location_provider_service.dart';
+import 'presentation/providers/theme_provider.dart';
 import 'presentation/screens/home_screen.dart';
 import 'presentation/screens/map_screen.dart';
 import 'presentation/screens/search_screen.dart';
@@ -58,14 +59,19 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UserProfileProvider(PreferencesService.instance)),
         ChangeNotifierProvider(create: (_) => PeatProfileProvider(PreferencesService.instance)),
         ChangeNotifierProvider(create: (_) => FoodPreferenceProvider(PreferencesService.instance)),
+        ChangeNotifierProvider(create: (_) => ThemeProvider(PreferencesService.instance)),
       ],
-      child: MaterialApp(
-        title: 'TasteMap',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        home: const MainScreen(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: 'TasteMap',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeProvider.themeMode,
+            home: const MainScreen(),
+          );
+        },
       ),
     );
   }

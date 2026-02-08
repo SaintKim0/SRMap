@@ -26,8 +26,10 @@ class _MyPageScreenState extends State<MyPageScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<BookmarkProvider>().loadBookmarks();
-    context.read<VisitedProvider>().loadVisited();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<BookmarkProvider>().loadBookmarks();
+      context.read<VisitedProvider>().loadVisited();
+    });
   }
 
   @override

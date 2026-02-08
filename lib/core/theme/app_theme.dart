@@ -152,21 +152,48 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
-      primary: primaryColor,
+      primary: secondaryColor, // Use lighter blue for better visibility in Dark Mode
       secondary: secondaryColor,
       error: errorColor,
+      surface: Color(0xFF1E1E1E), // Dark Grey Surface
+      background: Color(0xFF121212), // Almost Black Background
     ),
-    textTheme: GoogleFonts.robotoTextTheme(ThemeData.dark().textTheme),
+    scaffoldBackgroundColor: const Color(0xFF121212),
+    cardColor: const Color(0xFF252525), // Slightly lighter than background, but darker than before
+    textTheme: GoogleFonts.robotoTextTheme(ThemeData.dark().textTheme).copyWith(
+      displayLarge: const TextStyle(color: Colors.white),
+      displayMedium: const TextStyle(color: Colors.white),
+      displaySmall: const TextStyle(color: Colors.white),
+      headlineLarge: const TextStyle(color: Colors.white),
+      headlineMedium: const TextStyle(color: Colors.white),
+      headlineSmall: const TextStyle(color: Colors.white),
+      titleLarge: const TextStyle(color: Colors.white),
+      titleMedium: const TextStyle(color: Colors.white),
+      titleSmall: const TextStyle(color: Color(0xFFE0E0E0), fontWeight: FontWeight.bold), // Brighter and bold for visibility
+      bodyLarge: const TextStyle(color: Color(0xFFEEEEEE)),
+      bodyMedium: const TextStyle(color: Color(0xFFD0D0D0)), // Brighter Grey for better visibility
+      bodySmall: const TextStyle(color: Color(0xFFB0B0B0)), // Brighter Grey for tertiary
+      labelLarge: const TextStyle(color: Colors.white),
+      labelMedium: const TextStyle(color: Color(0xFFD0D0D0)),
+      labelSmall: const TextStyle(color: Color(0xFFB0B0B0)),
+    ),
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,
+      backgroundColor: Color(0xFF1E1E1E),
+      foregroundColor: Colors.white,
     ),
     cardTheme: CardThemeData(
-      elevation: 2,
+      elevation: 4,
+      color: const Color(0xFF252525),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
-      shadowColor: Colors.black.withOpacity(0.2),
+      shadowColor: Colors.black.withOpacity(0.5), // Stronger shadow for depth
     ),
+    iconTheme: const IconThemeData(
+      color: Color(0xFFBDBDBD),
+    ),
+    dividerColor: Colors.white24,
   );
 }

@@ -1,0 +1,4 @@
+no,media_type,title,place_name,place_type,description,opening_hours,break_time,closed_days,address,latitude,longitude,phone,last_updated,michelin_tier
+1,show,샘플프로그램,샘플식당,restaurant,샘플 설명,매일 11시 - 21시,15시 - 17시,연중무휴,서울특별시 강남구 테헤란로 123,37.5012345,127.0398765,02-1234-5678,2026-02-07,
+2,movie,샘플영화,샘플카페,cafe,영화 촬영지 카페,매일 10시 - 22시,정보없음,월요일,서울특별시 종로구 종로 456,37.5701234,126.9876543,02-9876-5432,2026-02-07,
+3,blackwhite,흑백요리사 시즌1,샘플요리점,restaurant,참가 셰프: 샘플셰프,화-일 12시 - 22시,15시 - 17시,월요일,경기도 성남시 분당구 판교로 789,37.3945678,127.1112345,031-1111-2222,2026-02-07,

@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Theme.of(context).cardColor,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Theme.of(context).shadowColor.withOpacity(0.05),
                           blurRadius: 4,
                           offset: const Offset(0, 2),
                         ),
@@ -455,18 +455,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         decoration: BoxDecoration(
           color: isSelected
-              ? Theme.of(context).primaryColor
-              : Colors.transparent,
+              ? (Theme.of(context).brightness == Brightness.dark 
+                  ? const Color(0xFF6BA3C7) 
+                  : Theme.of(context).primaryColor)
+              : Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).brightness == Brightness.dark 
+                ? const Color(0xFF6BA3C7) 
+                : Theme.of(context).primaryColor,
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
               color: isSelected
                   ? Theme.of(context).primaryColor.withOpacity(0.4)
-                  : Colors.black.withOpacity(0.15),
+                  : Theme.of(context).shadowColor.withOpacity(0.15),
               blurRadius: isSelected ? 8 : 4,
               offset: Offset(0, isSelected ? 4 : 2),
               spreadRadius: isSelected ? 1 : 0,
@@ -480,8 +484,8 @@ class _HomeScreenState extends State<HomeScreen> {
               fontSize: fontSize,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
               color: isSelected
-                  ? Colors.white
-                  : Theme.of(context).textTheme.bodyMedium?.color,
+                  ? (Theme.of(context).brightness == Brightness.dark ? Colors.black87 : Colors.white) // Use dark text on light blue button in dark mode for contrast
+                  : (Theme.of(context).brightness == Brightness.dark ? const Color(0xFFE0E0E0) : Theme.of(context).textTheme.bodyMedium?.color),
               height: 1.2,
             ),
             textAlign: TextAlign.center,
@@ -686,7 +690,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: double.infinity,
             padding: cardP,
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withOpacity(0.08),
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(radius),
               border: Border.all(
                 color: Theme.of(context).primaryColor.withOpacity(0.5),
@@ -694,7 +698,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Theme.of(context).shadowColor.withOpacity(0.05),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),
@@ -705,7 +709,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icon(
                   Icons.map,
                   size: btnIconSize * 1.2,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF6BA3C7) : Theme.of(context).primaryColor,
                 ),
                 SizedBox(width: AppSpacing.spacingM(context)),
                 Expanded(
@@ -717,14 +721,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         '내 주변 맛집 보기',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF6BA3C7) : Theme.of(context).primaryColor,
                         ),
                       ),
                       SizedBox(height: AppSpacing.spacingXS(context)),
                       Text(
                         '지도에서 주변 맛집 위치를 확인하세요',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey[700],
+                          color: Theme.of(context).textTheme.bodySmall?.color,
                         ),
                       ),
                     ],
@@ -733,7 +737,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icon(
                   Icons.arrow_forward_ios,
                   size: 14,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF6BA3C7) : Theme.of(context).primaryColor,
                 ),
               ],
             ),
@@ -763,11 +767,11 @@ class _HomeScreenState extends State<HomeScreen> {
         width: double.infinity,
         padding: cardP,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(radius),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Theme.of(context).shadowColor.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -779,7 +783,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.restaurant_menu, size: btnIconSize, color: Theme.of(context).primaryColor),
+                Icon(Icons.restaurant_menu, size: btnIconSize, color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF6BA3C7) : Theme.of(context).primaryColor),
                 SizedBox(width: AppSpacing.spacingS(context)),
                 Text(
                   '맛집지도란?',
@@ -791,7 +795,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 IconButton(
                   icon: Icon(
                     _appIntroExpanded ? Icons.expand_less : Icons.expand_more,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).brightness == Brightness.dark ? const Color(0xFF6BA3C7) : Theme.of(context).primaryColor,
                   ),
                   onPressed: () => setState(() => _appIntroExpanded = !_appIntroExpanded),
                   padding: EdgeInsets.zero,

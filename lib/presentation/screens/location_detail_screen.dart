@@ -556,7 +556,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     );
   }
 
-  /// 네이버맵 열기 — 1순위 장소명+시·군, 안 되면 2순위 상세주소
+  /// 네이버맵 열기
   Future<void> _openNaverMap() async {
     final address = _location!.address.trim();
     final queryByAddress = address.isNotEmpty ? address : null;
@@ -574,32 +574,21 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     final naverMapWebUrl = Uri.parse('https://map.naver.com/v5/search/${Uri.encodeComponent(searchQuery)}');
 
     try {
-      if (await canLaunchUrl(naverMapSearchUrl)) {
-        await launchUrl(naverMapSearchUrl, mode: LaunchMode.externalApplication);
-        return;
-      }
-      await launchUrl(naverMapWebUrl, mode: LaunchMode.externalApplication);
+      // 1. 앱 실행 시도 (canLaunchUrl 체크 없이 시도하여 설치된 경우 무조건 실행)
+      // externalNonBrowserApplication가 일부 기기에서 커스텀 스킴에 대해 예외를 발생시킬 수 있으므로 externalApplication 사용
+      await launchUrl(naverMapSearchUrl, mode: LaunchMode.externalApplication);
     } catch (e) {
-      if (queryByAddress != null && queryByAddress != searchQuery) {
-        try {
-          final fallbackUrl = Uri(
-            scheme: 'nmap',
-            host: 'search',
-            queryParameters: {'query': queryByAddress},
-          );
-          if (await canLaunchUrl(fallbackUrl)) {
-            await launchUrl(fallbackUrl, mode: LaunchMode.externalApplication);
-            return;
-          }
-          await launchUrl(
-            Uri.parse('https://map.naver.com/v5/search/${Uri.encodeComponent(queryByAddress)}'),
-            mode: LaunchMode.externalApplication,
-          );
-        } catch (_) {
-          await launchUrl(naverMapWebUrl, mode: LaunchMode.externalApplication);
-        }
-      } else {
+      // 2. 앱 실행 실패 시 웹페이지로 이동
+      try {
         await launchUrl(naverMapWebUrl, mode: LaunchMode.externalApplication);
+      } catch (e2) {
+        // 웹도 실패하면 주소로 재시도
+        if (queryByAddress != null && queryByAddress != searchQuery) {
+            final fallbackUrl = Uri.parse('https://map.naver.com/v5/search/${Uri.encodeComponent(queryByAddress)}');
+            try {
+                await launchUrl(fallbackUrl, mode: LaunchMode.externalApplication);
+            } catch (_) {}
+        }
       }
     }
   }
@@ -646,12 +635,11 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     return '';
   }
 
-  /// 카카오맵 열기 — 1순위 장소명+시·군, 안 되면 2순위 상세주소
+  /// 카카오맵 열기
   Future<void> _openKakaoMap() async {
     final lat = _location!.latitude;
     final lng = _location!.longitude;
     final address = _location!.address.trim();
-    final queryByAddress = address.isNotEmpty ? address : null;
     final cityDistrict = _extractCityDistrict(address);
     final queryByNameDistrict = cityDistrict.isNotEmpty
         ? '${_location!.name} $cityDistrict'
@@ -674,56 +662,57 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     );
     final kakaoMapWebUrl = Uri.parse('https://map.kakao.com/link/search/${Uri.encodeComponent(searchQuery)}');
 
+    final kakaoMapLookUrl = Uri(
+      scheme: 'kakaomap',
+      host: 'look',
+      queryParameters: {
+        'p': '$lat,$lng',
+      },
+    );
+
     try {
-      if (await canLaunchUrl(kakaoMapSearchUrl)) {
+        // 1. 앱 실행 시도 (검색)
         await launchUrl(kakaoMapSearchUrl, mode: LaunchMode.externalApplication);
-        return;
-      }
-      if (await canLaunchUrl(kakaoMapPlaceUrl)) {
-        await launchUrl(kakaoMapPlaceUrl, mode: LaunchMode.externalApplication);
-        return;
-      }
-      await launchUrl(kakaoMapWebUrl, mode: LaunchMode.externalApplication);
-    } catch (e) {
-      if (queryByAddress != null && queryByAddress != searchQuery) {
+    } catch (_) {
         try {
-          final fallbackSearchUrl = Uri(
-            scheme: 'kakaomap',
-            host: 'search',
-            queryParameters: {'q': queryByAddress},
-          );
-          if (await canLaunchUrl(fallbackSearchUrl)) {
-            await launchUrl(fallbackSearchUrl, mode: LaunchMode.externalApplication);
-            return;
-          }
-          await launchUrl(
-            Uri.parse('https://map.kakao.com/link/search/${Uri.encodeComponent(queryByAddress)}'),
-            mode: LaunchMode.externalApplication,
-          );
-        } catch (_) {
-          await launchUrl(kakaoMapWebUrl, mode: LaunchMode.externalApplication);
+            // 2. 앱 실행 시도 (좌표로 보기 - fallback)
+            await launchUrl(kakaoMapLookUrl, mode: LaunchMode.externalApplication);
+        } catch (e) {
+            // 3. 앱 실행 실패 시 웹페이지로 이동
+            try {
+                await launchUrl(kakaoMapWebUrl, mode: LaunchMode.externalApplication);
+            } catch (_) {}
         }
-      } else {
-        await launchUrl(kakaoMapWebUrl, mode: LaunchMode.externalApplication);
-      }
     }
   }
 
-  /// 구글맵 열기 — 1순위 장소명+시·군, 안 되면 2순위 상세주소
+  /// 구글맵 열기
   Future<void> _openGoogleMap() async {
     final lat = _location!.latitude;
     final lng = _location!.longitude;
     final address = _location!.address.trim();
-    final queryByAddress = address.isNotEmpty ? address : null;
     final cityDistrict = _extractCityDistrict(address);
     final queryByNameDistrict = cityDistrict.isNotEmpty
         ? '${_location!.name} $cityDistrict'
         : _location!.name;
     final searchQuery = queryByNameDistrict;
     
-    // 구글맵 URL (1순위: 장소명+시·군)
-    // Uri 생성자를 사용하여 자동 인코딩 처리
-    final googleMapSearchUrl = Uri(
+    // 앱용 URL (geo 스킴)
+    final googleMapAppUrl = Uri(
+      scheme: 'geo',
+      path: '$lat,$lng',
+      queryParameters: {'q': searchQuery},
+    );
+
+    // 좌표만 사용 (폴백) - 앱
+    final googleMapAppCoordUrl = Uri(
+      scheme: 'geo',
+      path: '$lat,$lng',
+      queryParameters: {'q': '$lat,$lng'},
+    );
+    
+    // 웹용 URL
+    final googleMapWebUrl = Uri(
       scheme: 'https',
       host: 'www.google.com',
       path: '/maps/search/',
@@ -733,59 +722,19 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
       },
     );
     
-    // 앱용 URL (geo 스킴)
-    final googleMapAppUrl = Uri(
-      scheme: 'geo',
-      path: '$lat,$lng',
-      queryParameters: {'q': searchQuery},
-    );
-    
-    // 좌표만 사용 (폴백)
-    final googleMapCoordUrl = Uri(
-      scheme: 'https',
-      host: 'www.google.com',
-      path: '/maps/search/',
-      queryParameters: {
-        'api': '1',
-        'query': '$lat,$lng',
-      },
-    );
-    
     try {
-      if (await canLaunchUrl(googleMapSearchUrl)) {
-        await launchUrl(googleMapSearchUrl, mode: LaunchMode.externalApplication);
-        return;
-      }
-      if (await canLaunchUrl(googleMapAppUrl)) {
-        await launchUrl(googleMapAppUrl, mode: LaunchMode.externalApplication);
-        return;
-      }
-      await launchUrl(googleMapCoordUrl, mode: LaunchMode.externalApplication);
-    } catch (e) {
-      if (queryByAddress != null && queryByAddress != searchQuery) {
+      // 1. 앱 실행 시도 (geo: 검색)
+      await launchUrl(googleMapAppUrl, mode: LaunchMode.externalNonBrowserApplication);
+    } catch (_) {
         try {
-          final fallbackSearchUrl = Uri(
-            scheme: 'https',
-            host: 'www.google.com',
-            path: '/maps/search/',
-            queryParameters: {'api': '1', 'query': queryByAddress},
-          );
-          final fallbackAppUrl = Uri(
-            scheme: 'geo',
-            path: '$lat,$lng',
-            queryParameters: {'q': queryByAddress},
-          );
-          if (await canLaunchUrl(fallbackSearchUrl)) {
-            await launchUrl(fallbackSearchUrl, mode: LaunchMode.externalApplication);
-            return;
-          }
-          if (await canLaunchUrl(fallbackAppUrl)) {
-            await launchUrl(fallbackAppUrl, mode: LaunchMode.externalApplication);
-            return;
-          }
-        } catch (_) {}
-      }
-      await launchUrl(googleMapCoordUrl, mode: LaunchMode.externalApplication);
+            // 2. 앱 실행 시도 (geo: 좌표)
+            await launchUrl(googleMapAppCoordUrl, mode: LaunchMode.externalNonBrowserApplication);
+        } catch (e) {
+            // 3. 앱 실행 실패 시 웹페이지로 이동
+            try {
+                await launchUrl(googleMapWebUrl, mode: LaunchMode.externalApplication);
+            } catch (_) {}
+        }
     }
   }
 
