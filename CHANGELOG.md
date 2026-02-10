@@ -5,6 +5,19 @@ All notable changes to TasteMap will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2026-02-10
+
+### Added
+- **동적 프로그램 썸네일**: 공식 이미지가 없는 예능 프로그램에 대해 세련된 디자인의 동적 썸네일 자동 생성
+- **썸네일 데모 화면**: 다양한 프로그램 썸네일 시안을 한눈에 볼 수 있는 데모 페이지 추가
+
+### Changed
+- **데이터 최적화**: locations.csv 내의 불필요한 중복 항목(약 244개) 제거 및 데이터 무결성 강화
+
+### Technical
+- APK 크기: 최적화 진행 중
+- 데이터 용량 절감: locations.csv 약 5% 용량 감소
+
 ## [1.0.1] - 2026-02-06
 
 ### Added

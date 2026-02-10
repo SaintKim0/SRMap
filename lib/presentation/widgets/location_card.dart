@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'program_thumbnail.dart';
 import '../../data/models/location.dart';
 import '../../data/services/map_service.dart';
 
@@ -379,7 +380,16 @@ class LocationCard extends StatelessWidget {
         ? (screenWidth < 360 ? 36.0 : screenWidth < 400 ? 40.0 : 44.0)
         : (screenWidth < 360 ? 56.0 : screenWidth < 400 ? 64.0 : 72.0);
 
-    // 2. Determine Sector Marker Overlay (if any)
+    // 2. Specialized Program Thumbnail for 'show'
+    if (mediaType == 'show' || mediaType == 'artist') {
+      return ProgramThumbnail(
+        programName: location.contentTitle ?? location.name,
+        width: double.infinity,
+        height: double.infinity,
+      );
+    }
+
+    // 3. Determine Sector Marker Overlay (if any)
     String? markerAsset;
     Color? sectorColor;
     if (mediaType != null) {
