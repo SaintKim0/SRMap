@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **데이터 최적화**: locations.csv 내의 불필요한 중복 항목(약 244개) 제거 및 데이터 무결성 강화
 
 ### Technical
-- APK 크기: 최적화 진행 중
+- APK 크기: 57.3MB (arm64-v8a), 49.6MB (armeabi-v7a)
 - 데이터 용량 절감: locations.csv 약 5% 용량 감소
 
 ## [1.0.1] - 2026-02-06
