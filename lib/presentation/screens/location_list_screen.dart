@@ -144,7 +144,12 @@ class _LocationListScreenState extends State<LocationListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title ?? '맛집 목록'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: Text(
+          widget.title ?? '맛집 목록',
+          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
             icon: Icon(_viewMode == ViewMode.list ? Icons.grid_view : Icons.view_list),

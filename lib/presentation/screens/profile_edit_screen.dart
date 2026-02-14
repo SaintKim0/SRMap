@@ -118,7 +118,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('프로필 편집'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: const Text(
+          '프로필 편집',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
         actions: [
           TextButton(
             onPressed: context.watch<UserProfileProvider>().isLoading 

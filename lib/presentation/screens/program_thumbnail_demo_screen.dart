@@ -21,7 +21,12 @@ class ProgramThumbnailDemoScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('프로그램 썸네일 시안'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: const Text(
+          '프로그램 썸네일 시안',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,

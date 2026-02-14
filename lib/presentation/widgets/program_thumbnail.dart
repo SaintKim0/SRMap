@@ -33,119 +33,143 @@ class ProgramThumbnail extends StatelessWidget {
     
     final List<Color> gradient = gradients[hash.abs() % gradients.length];
     
-    // Clean program name for display
-    String displayName = programName;
-    if (displayName.contains('시즌')) {
-      // Handle seasons if needed, or keep as is
+    // 3. semantic line breaks for common programs
+    String formattedName = programName;
+    final Map<String, String> semanticBreaks = {
+      '생생정보통': '생생\n정보통',
+      '2TV생생정보': '2TV\n생생정보',
+      '식객허영만의백반기행': '식객 허영만의\n백반기행',
+      '식객 허영만의 백반기행': '식객 허영만의\n백반기행',
+      '생활의달인': '생활의\n달인',
+      '생활의 달인': '생활의\n달인',
+      '맛있는녀석들': '맛있는\n녀석들',
+      '맛있는 녀석들': '맛있는\n녀석들',
+      '백종원의3대천왕': '백종원의\n3대천왕',
+      '백종원의 3대천왕': '백종원의\n3대천왕',
+      '전지적참견시점': '전지적\n참견시점',
+      '전지적 참견시점': '전지적\n참견시점',
+      '백종원의골목식당': '백종원의\n골목식당',
+      '백종원의 골목식당': '백종원의\n골목식당',
+      '수요미식회': '수요\n미식회',
+      '놀라운토요일': '놀라운\n토요일',
+      '놀라운 토요일': '놀라운\n토요일',
+      '전현무계획3': '전현무\n계획3',
+      '전현무계획2': '전현무\n계획2',
+      '전현무계획': '전현무\n계획',
+      '생방송오늘저녁': '생방송\n오늘저녁',
+      '모닝와이드': '모닝\n와이드',
+      '맛있을지도': '맛있을\n지도',
+      '생방송투데이': '생방송\n투데이',
+      'VJ특공대': 'VJ\n특공대',
+      '성시경의 먹을텐데': '성시경의\n먹을텐데',
+      '6시 내고향': '6시\n내고향',
+    };
+
+    if (semanticBreaks.containsKey(formattedName)) {
+      formattedName = semanticBreaks[formattedName]!;
+    } else if (formattedName.length > 7 && !formattedName.contains('\n')) {
+      // Default break for long names if not in map (e.g., at space)
+      if (formattedName.contains(' ')) {
+        final parts = formattedName.split(' ');
+        if (parts.length >= 2) {
+          formattedName = '${parts[0]}\n${parts.sublist(1).join(' ')}';
+        }
+      }
     }
 
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: gradient,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Stack(
-        clipBehavior: Clip.antiAlias,
-        children: [
-          // Decorative Elements
-          Positioned(
-            right: -height * 0.2,
-            bottom: -height * 0.2,
-            child: Opacity(
-              opacity: 0.15,
-              child: Icon(
-                Icons.play_circle_outline,
-                size: height * 0.8,
-                color: Colors.white,
-              ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final actualWidth = constraints.maxWidth == double.infinity ? width : constraints.maxWidth;
+        final actualHeight = constraints.maxHeight == double.infinity ? height : constraints.maxHeight;
+
+        return Container(
+          width: actualWidth,
+          height: actualHeight,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: gradient,
             ),
-          ),
-          Positioned(
-            left: -height * 0.1,
-            top: -height * 0.1,
-            child: Opacity(
-              opacity: 0.1,
-              child: Icon(
-                Icons.tv,
-                size: height * 0.4,
-                color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
               ),
-            ),
+            ],
           ),
-          
-          // Main Text
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Stylized Badge
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    margin: const EdgeInsets.only(bottom: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      'ENTERTAINMENT',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
-                        fontSize: height * 0.08,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
+          child: Stack(
+            clipBehavior: Clip.antiAlias,
+            children: [
+              // Decorative Elements
+              Positioned(
+                right: -actualHeight * 0.2,
+                bottom: -actualHeight * 0.2,
+                child: Opacity(
+                  opacity: 0.15,
+                  child: Icon(
+                    Icons.live_tv,
+                    size: actualHeight * 0.7,
+                    color: Colors.white,
                   ),
-                  // Program Title
-                  Text(
-                    displayName,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: height * (displayName.length > 10 ? 0.15 : 0.18),
-                      fontWeight: FontWeight.w900,
-                      shadows: [
-                        Shadow(
-                          color: Colors.black.withOpacity(0.4),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
+                ),
+              ),
+              
+              // Main Text
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Stylized Badge
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                        margin: const EdgeInsets.only(bottom: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                      ],
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                        child: Text(
+                          'SHOW',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.9),
+                            fontSize: actualHeight * 0.06, // Smaller
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                      // Program Title
+                      Text(
+                        formattedName,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: actualHeight * 0.11, // Standardized to smaller size for consistency
+                          fontWeight: FontWeight.w900,
+                          height: 1.1, // Tighter line height
+                          shadows: [
+                            Shadow(
+                              color: Colors.black.withOpacity(0.4),
+                              blurRadius: 4,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
-                  // Decorative underline
-                  Container(
-                    margin: const EdgeInsets.only(top: 4),
-                    width: 40,
-                    height: 2,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(1),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

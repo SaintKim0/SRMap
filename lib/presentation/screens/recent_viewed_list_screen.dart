@@ -25,7 +25,12 @@ class _RecentViewedListScreenState extends State<RecentViewedListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('최근 본 맛집'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: const Text(
+          '최근 본 맛집',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
         actions: [
           Consumer<RecentViewedProvider>(
             builder: (context, provider, child) {

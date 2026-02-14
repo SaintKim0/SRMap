@@ -87,15 +87,16 @@ class LocationCard extends StatelessWidget {
                           ],
                         ],
                       ),
-                      SizedBox(height: screenWidth < 360 ? 3.0 : 4.0),
-                      if (location.chefName != null && location.mediaType?.toLowerCase() == 'blackwhite') ...[
+                      const SizedBox(height: 4.0),
+                      // Chef Name Row (Reserved space for consistency)
+                      if (_shouldShowChefName()) ...[
                         Row(
                           children: [
                             Icon(Icons.person, size: iconSize, color: Theme.of(context).iconTheme.color),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Expanded(
                               child: Text(
-                                '세프: ${location.chefName}',
+                                location.chefName != null ? '셰프: ${location.chefName}' : '',
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                   color: Theme.of(context).textTheme.bodyMedium?.color,
                                   fontSize: addressFontSize,
@@ -108,6 +109,9 @@ class LocationCard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
+                      ] else if (_isFoodSector()) ...[
+                        // Reserve space to unify height with Black & White/Michelin cards
+                        SizedBox(height: (iconSize + (screenWidth < 360 ? 2.0 : 3.0))),
                       ],
                       Row(
                         children: [
@@ -245,15 +249,15 @@ class LocationCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: screenWidth < 360 ? 3.0 : 4.0),
-                        if (location.chefName != null && location.mediaType?.toLowerCase() == 'blackwhite') ...[
+                        const SizedBox(height: 4.0),
+                        if (_shouldShowChefName()) ...[
                           Row(
                             children: [
                               Icon(Icons.person, size: iconSize, color: Theme.of(context).iconTheme.color),
-                              SizedBox(width: 4),
+                              const SizedBox(width: 4),
                               Expanded(
                                 child: Text(
-                                  '세프: ${location.chefName}',
+                                  location.chefName != null ? '셰프: ${location.chefName}' : '',
                                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: Theme.of(context).textTheme.bodySmall?.color,
                                     fontSize: addressFontSize,
@@ -266,6 +270,9 @@ class LocationCard extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
+                        ] else if (_isFoodSector()) ...[
+                          // Reserve space
+                          SizedBox(height: addressFontSize + (screenWidth < 360 ? 2.0 : 3.0)),
                         ],
                         Text(
                           location.address,
@@ -529,5 +536,21 @@ class LocationCard extends StatelessWidget {
           return isDark ? Colors.white70 : const Color(0xFF2C2C2C);
       }
       return _getSectorColor();
+  }
+
+  bool _shouldShowChefName() {
+    final mediaType = location.mediaType?.toLowerCase();
+    final title = location.contentTitle?.toLowerCase() ?? '';
+    
+    // Show if it's Black & White Chef or Michelin 2025
+    if (mediaType == 'blackwhite') return true;
+    if (mediaType == 'guide' && title.contains('2025')) return true;
+    
+    return false;
+  }
+
+  bool _isFoodSector() {
+    final mediaType = location.mediaType?.toLowerCase();
+    return mediaType == 'blackwhite' || mediaType == 'guide';
   }
 }

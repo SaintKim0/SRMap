@@ -239,47 +239,40 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 70, // Reduced height
-        title: Padding(
-          padding: const EdgeInsets.only(top: 10.0), // Reduced top padding
-          child: Text(
-            "내 주변을 검색해 보세요 (복수선택 가능!)",
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              fontSize: 14, // Smaller font
-              color: Colors.white,
-            ),
-          ),
+        toolbarHeight: 50, // Standard height
+        title: const Text(
+          "내 주변을 검색해 보세요 (복수선택 가능!)",
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(240),
+          preferredSize: const Size.fromHeight(280), // Reduced since text moved to title
           child: Column(
             children: [
               // Search Bar Moved Here
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                padding: const EdgeInsets.fromLTRB(16, 5, 16, 16), // Minimized top padding
                 child: Container(
-                  height: 32, // Significantly reduced height (closer to "50%" feel vs original large ones)
+                  height: 28, // Reduced height as requested
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16), // Adjusted radius
+                    borderRadius: BorderRadius.circular(14), // Half of height for perfect round
                   ),
                   child: TextField(
                     controller: _searchController,
                     autofocus: false,
-                    style: const TextStyle(color: Colors.black87, fontSize: 13), // Smaller font
-                    textAlignVertical: TextAlignVertical.center,
+                    style: const TextStyle(color: Colors.black87, fontSize: 13),
+                    textAlignVertical: TextAlignVertical.center, // Ensure vertical centering
                     decoration: InputDecoration(
                       hintText: '지역 검색 (예: 강남구, 부산)',
-                      hintStyle: TextStyle(color: Colors.grey[600], fontSize: 13), // Smaller hint
+                      hintStyle: TextStyle(color: Colors.grey[600], fontSize: 13),
                       border: InputBorder.none,
                       isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Adjusted padding
-                      prefixIcon: const Icon(Icons.search, size: 18, color: Colors.grey), // Smaller icon
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0), // Removed vertical padding to let it center
+                      prefixIcon: const Icon(Icons.search, size: 16, color: Colors.grey),
                       suffixIcon: _searchController.text.isNotEmpty
                           ? IconButton(
-                              icon: const Icon(Icons.clear, size: 16, color: Colors.grey),
+                              icon: const Icon(Icons.clear, size: 14, color: Colors.grey),
                               onPressed: _clearSearch,
                               padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),

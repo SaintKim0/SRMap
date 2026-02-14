@@ -29,7 +29,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('설정'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: const Text(
+          '설정',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
       ),
       body: ListView(
         children: [

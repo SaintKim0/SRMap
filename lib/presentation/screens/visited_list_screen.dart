@@ -25,7 +25,12 @@ class _VisitedListScreenState extends State<VisitedListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('다녀온 곳'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: const Text(
+          '다녀온 곳',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Consumer<VisitedProvider>(
         builder: (context, provider, child) {

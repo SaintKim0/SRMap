@@ -12,6 +12,7 @@ import '../providers/location_provider_service.dart'; // LocationProvider (for c
 import '../widgets/location_card.dart';
 import '../widgets/empty_state.dart';
 import '../widgets/skeleton_loader.dart';
+import '../widgets/program_thumbnail.dart';
 import 'location_list_screen.dart';
 import 'location_detail_screen.dart';
 import 'search_screen.dart';
@@ -175,14 +176,14 @@ class _HomeScreenState extends State<HomeScreen> {
         title: LayoutBuilder(
           builder: (context, constraints) {
             final screenWidth = MediaQuery.of(context).size.width;
-            final fontSize = screenWidth < 360 ? 14.0 : screenWidth < 400 ? 16.0 : 17.0;
             return Text(
-              '맛집지도',
-              style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+              '맛집 지도',
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             );
           },
         ),
-        toolbarHeight: 48,
+        centerTitle: true,
+        toolbarHeight: 50,
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -1380,7 +1381,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final isExpanded = provider.expandedContentTitle == contentTitle;
     IconData iconData = Icons.restaurant;
     if (provider.selectedSector == '미슐렝 코리아') iconData = Icons.restaurant;
-    if (provider.selectedSector == '예능 촬영 맛집') iconData = Icons.theater_comedy;
+    if (provider.selectedSector == '예능 촬영 맛집') iconData = Icons.live_tv;
     if (provider.selectedSector == '흑백요리사') iconData = Icons.restaurant_menu;
 
     final boxSize = AppSpacing.iconBoxSize(context);
@@ -1420,23 +1421,33 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: cardP,
               child: Row(
                 children: [
-                  Container(
-                    width: boxSize,
-                    height: boxSize,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark 
-                          ? Colors.white10 
-                          : Theme.of(context).primaryColor.withOpacity(0.15),
+                  if (provider.selectedSector == '예능 촬영 맛집')
+                    ClipRRect(
                       borderRadius: BorderRadius.circular(boxRadius),
+                      child: ProgramThumbnail(
+                        programName: contentTitle,
+                        width: boxSize,
+                        height: boxSize,
+                      ),
+                    )
+                  else
+                    Container(
+                      width: boxSize,
+                      height: boxSize,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).brightness == Brightness.dark 
+                            ? Colors.white10 
+                            : Theme.of(context).primaryColor.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(boxRadius),
+                      ),
+                      child: Icon(
+                        iconData, 
+                        size: boxSize * 0.5, 
+                        color: Theme.of(context).brightness == Brightness.dark 
+                            ? const Color(0xFF6BA3C7) 
+                            : Theme.of(context).primaryColor
+                      ),
                     ),
-                    child: Icon(
-                      iconData, 
-                      size: boxSize * 0.5, 
-                      color: Theme.of(context).brightness == Brightness.dark 
-                          ? const Color(0xFF6BA3C7) 
-                          : Theme.of(context).primaryColor
-                    ),
-                  ),
                   SizedBox(width: AppSpacing.spacingM(context)),
                   Expanded(
                     child: Column(

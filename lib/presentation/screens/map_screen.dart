@@ -479,7 +479,12 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isSingleViewMode ? _singleModeLocation?.name ?? '지도' : '맛집 지도'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: Text(
+          _isSingleViewMode ? _singleModeLocation?.name ?? '지도' : '맛집 지도',
+          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

@@ -133,11 +133,13 @@ class _PeatSurveyScreenState extends State<PeatSurveyScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        toolbarHeight: 50,
         title: Text(
           '질문 ${_currentStep + 1} / ${_questions.length}',
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.secondary,
+          style: const TextStyle(
+            color: Colors.white, // Standard white for dark survey
             fontWeight: FontWeight.bold,
+            fontSize: 17,
           ),
         ),
         centerTitle: true,

@@ -36,7 +36,12 @@ class _MyPageScreenState extends State<MyPageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('마이 페이지'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: const Text(
+          '마이 페이지',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),

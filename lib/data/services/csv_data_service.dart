@@ -180,12 +180,16 @@ class CsvDataService {
             }
           }
 
-          // Extract chef name from column 5 for blackwhite media type
+          // Extract chef name from column 5 for blackwhite and Michelin guide (if updated)
           String? chefName;
-          if (normalizedMediaType == 'blackwhite') {
-            final chefNameRaw = descRaw.trim();
-            if (chefNameRaw.isNotEmpty && chefNameRaw != 'null' && chefNameRaw != '정보없음') {
-              chefName = chefNameRaw;
+          if (normalizedMediaType == 'blackwhite' || (normalizedMediaType == 'guide' && title.contains('2025'))) {
+            final possibleChefName = descRaw.trim();
+            if (possibleChefName.isNotEmpty && 
+                possibleChefName != 'null' && 
+                possibleChefName != '정보없음' && 
+                !possibleChefName.contains('레스토랑.') &&
+                !possibleChefName.contains('빕 구르망')) {
+              chefName = possibleChefName;
             }
           }
 

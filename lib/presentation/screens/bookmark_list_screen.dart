@@ -26,7 +26,12 @@ class _BookmarkListScreenState extends State<BookmarkListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('저장한 맛집'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: const Text(
+          '저장한 맛집',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Consumer<BookmarkProvider>(
         builder: (context, provider, child) {

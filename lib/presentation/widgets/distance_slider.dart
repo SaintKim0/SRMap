@@ -14,33 +14,18 @@ class DistanceSlider extends StatelessWidget {
     this.totalCount = 0,
   });
 
-  // Steps matching user request: Left=All, First=100km ... Right=My Location(0km/1km)
+  // Steps: 전체, 100km, 50km, 25km, 10km, 5km, 내 위치(1km)
   static const List<double?> _steps = [null, 100.0, 50.0, 25.0, 10.0, 5.0, 1.0];
 
   @override
   Widget build(BuildContext context) {
     // Determine current slider value based on selectedDistance
-    // If selected is not in steps, find closest or default to 0 (All)
     double currentSliderValue = 0.0;
-    if (selectedDistance == null) {
-      currentSliderValue = 0.0;
-    } else {
+    if (selectedDistance != null) {
       final index = _steps.indexOf(selectedDistance);
       if (index != -1) {
         currentSliderValue = index.toDouble();
-      } else {
-        // Fallback for custom values if any (though we stick to steps)
-        currentSliderValue = 0.0; 
       }
-    }
-
-    String rightLabelText;
-    if (selectedDistance == null) {
-      rightLabelText = '전체 지역';
-    } else if (selectedDistance == 1.0) {
-      rightLabelText = '내 위치 (1km)';
-    } else {
-      rightLabelText = '${selectedDistance!.round()}km 이내';
     }
 
     return Column(
@@ -53,16 +38,8 @@ class DistanceSlider extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '전국($totalCount)', 
-                style: const TextStyle(color: Colors.white70, fontSize: 12)
-              ),
-              Text(
-                rightLabelText,
-                style: const TextStyle(
-                  color: Colors.white, 
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14
-                ),
+                '전국($totalCount)',
+                style: const TextStyle(color: Colors.white, fontSize: 12),
               ),
             ],
           ),
@@ -91,7 +68,6 @@ class DistanceSlider extends StatelessWidget {
                 thumbColor: Colors.white,
                 trackHeight: 2.0,
                 tickMarkShape: SliderTickMarkShape.noTickMark,
-                // Make thumb slightly bigger for easier touch
                 thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8.0),
                 overlayShape: const RoundSliderOverlayShape(overlayRadius: 16.0),
               ),
@@ -112,12 +88,20 @@ class DistanceSlider extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('전체', style: TextStyle(color: Colors.white38, fontSize: 10)),
-              Text('100km', style: TextStyle(color: Colors.white38, fontSize: 10)),     // 2nd tick
-              Spacer(),
-              Text('내 위치', style: TextStyle(color: Colors.white38, fontSize: 10)),
-            ],
+            children: _steps.map((dist) {
+              String label;
+              if (dist == null) {
+                label = '전체';
+              } else if (dist == 1.0) {
+                label = '내 위치';
+              } else {
+                label = '${dist.round()}km';
+              }
+              return Text(
+                label,
+                style: const TextStyle(color: Colors.white, fontSize: 10),
+              );
+            }).toList(),
           ),
         ),
       ],

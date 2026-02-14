@@ -5,6 +5,14 @@ All notable changes to TasteMap will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-02-10
+
+### Changed
+- Refined Search Screen UI: moved instructions to AppBar title, reduced vertical gaps, and removed "전체 지역" label.
+- Overhauled Distance Slider: added specific increments (All, 100km, 50km, 25km, 10km, 5km, My Location) and improved visibility.
+- Unified Global AppBar Titles: standardized font size to 17px bold and updated spacing ("맛집 지도") across all screens.
+- Updated Entertainment (예능) tab icons to `Icons.live_tv`.
+
 ## [1.0.2] - 2026-02-10
 
 ### Added
@@ -82,10 +90,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 맛집 데이터: 1.8MB CSV
 - 디버그 서명 사용 (릴리스 키 필요)
 
+## [1.1.0] - 2026-02-14
+
+### Added
+- **미슐랭 가이드 2025 고도화**: 전국 미슐랭 2025 맛집 데이터 보완 및 전용 마커 적용
+- **미슐랭 셰프 정보**: 미슐랭 2025 레스토랑의 헤드 셰프 정보 수집 및 노출
+- **전현무계획 3**: 최신 예능 프로그램 데이터 및 전용 동적 썸네일 추가
+
+### Changed
+- **카드 UI 통일**: 미슐랭과 흑백요리사 카드의 높이를 동일하게 맞추고 셰프 정보를 시각적으로 강조
+- **데이터 정제**: 자가 진단 및 다단계 클렌징을 통한 셰프 성함 데이터 품질 향상
+
+### Technical
+- **CSV 파싱 로직**: 미슐랭 셰프 이름 추출을 위한 CsvDataService 최적화
+- **UI 일관성**: Food Sector 전용 높이 보존(Space Reservation) 로직 적용
+
 ## [Unreleased]
 
-### Planned for v1.1.0
-- Google Play Store 릴리스 키 설정
+### Planned for v1.2.0
 - 리뷰 작성 및 관리 기능
 - 맛집 추천 알고리즘 고도화
 - 소셜 공유 기능

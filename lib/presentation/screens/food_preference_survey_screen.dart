@@ -109,7 +109,12 @@ class _FoodPreferenceSurveyScreenState extends State<FoodPreferenceSurveyScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('음식 취향 설정'),
+        toolbarHeight: 50,
+        centerTitle: true,
+        title: const Text(
+          '음식 취향 설정',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
         actions: [
           TextButton(
             onPressed: context.watch<FoodPreferenceProvider>().isLoading ? null : _savePreferences,
