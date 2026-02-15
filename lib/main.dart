@@ -146,9 +146,10 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         builder: (context, provider, child) => BottomNavigationBar(
           currentIndex: provider.currentIndex,
           onTap: (index) {
-            if (index == 0 && provider.currentIndex == 0) {
-              // 이미 홈 탭인 상태에서 홈 버튼 다시 클릭 시 섹터/필터 초기화
+            if (index == 0) {
+              // Always clear filters and switch to home when Home button is pressed
               context.read<LocationDataProvider>().clearSectorFilter();
+              provider.setIndex(0);
             } else {
               provider.setIndex(index);
             }

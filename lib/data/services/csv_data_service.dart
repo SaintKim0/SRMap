@@ -51,6 +51,8 @@ class CsvDataService {
       const int colLng = 11;
       const int colPhone = 12;
       const int colMichelinTier = 14;
+      const int colFoodCategory = 15;
+      const int colRepresentativeMenu = 16;
 
       int successCount = 0;
       int failCount = 0;
@@ -192,6 +194,18 @@ class CsvDataService {
               chefName = possibleChefName;
             }
           }
+          
+          final String? foodCategory = row.length > colFoodCategory
+              ? (row[colFoodCategory].toString().trim().isEmpty ? null : row[colFoodCategory].toString().trim())
+              : null;
+          final String? representativeMenu = row.length > colRepresentativeMenu
+              ? (row[colRepresentativeMenu].toString().trim().isEmpty ? null : row[colRepresentativeMenu].toString().trim())
+              : null;
+
+          // Debug log for first 5 rows
+          if (i < 5) {
+            print('Row $i - Name: $placeName, FoodCategory: $foodCategory, RepMenu: $representativeMenu');
+          }
 
           locations.add(Location(
             id: 'csv_${row[0]}', 
@@ -205,6 +219,8 @@ class CsvDataService {
             contentReleaseYear: null,
             michelinTier: michelinTier,
             chefName: chefName,
+            foodCategory: foodCategory,
+            representativeMenu: representativeMenu,
             phoneNumber: phone == 'null' || phone.isEmpty ? null : phone,
             openingHours: combinedHours == 'null' || combinedHours.isEmpty ? null : combinedHours,
             imageUrls: finalImageUrls,

@@ -88,6 +88,30 @@ class LocationCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 4.0),
+                      // Food Category & Menu Row
+                      if (location.foodCategory != null || location.representativeMenu != null) ...[
+                        Row(
+                          children: [
+                            Icon(Icons.restaurant_menu, size: iconSize, color: Theme.of(context).primaryColor.withOpacity(0.7)),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                [location.foodCategory, location.representativeMenu]
+                                    .where((e) => e != null && e.isNotEmpty)
+                                    .join(' · '),
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: addressFontSize,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
+                      ],
                       // Chef Name Row (Reserved space for consistency)
                       if (_shouldShowChefName()) ...[
                         Row(
@@ -109,10 +133,10 @@ class LocationCard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
-                      ] else if (_isFoodSector()) ...[
-                        // Reserve space to unify height with Black & White/Michelin cards
                         SizedBox(height: (iconSize + (screenWidth < 360 ? 2.0 : 3.0))),
                       ],
+                      // Note: We removed the fixed spacer for food sector to accommodate the new menu row
+                      // while maintaining some level of consistency.
                       Row(
                         children: [
                           Icon(Icons.location_on, size: iconSize, color: Theme.of(context).iconTheme.color),
@@ -189,8 +213,8 @@ class LocationCard extends StatelessWidget {
           children: [
             // Image
             SizedBox(
-              width: 88, // 기존 110의 80% = 88
-              height: 88, // 기존 110의 80% = 88
+              width: 92, // Slight increase from 88 to fill vertical space better
+              height: 92, // Slight increase from 88
               child: _buildHeroImage(),
             ),
             // Content
@@ -206,7 +230,7 @@ class LocationCard extends StatelessWidget {
                   final addressFontSize = titleFontSize * 0.8;
                   final statFontSize = screenWidth < 360 ? 9.0 : screenWidth < 400 ? 10.0 : 11.0;
                   final iconSize = screenWidth < 360 ? 10.0 : screenWidth < 400 ? 11.0 : 12.0;
-                  final padding = screenWidth < 360 ? 6.0 : 8.0;
+                  final padding = screenWidth < 360 ? 4.0 : 6.0; // Reduced from 6/8 to compact the card
                   
                   return Padding(
                     padding: EdgeInsets.all(padding),
@@ -249,7 +273,30 @@ class LocationCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 4.0),
+                        const SizedBox(height: 2.0), // Reduced from 4.0 to compact the card
+                        if (location.foodCategory != null || location.representativeMenu != null) ...[
+                          Row(
+                            children: [
+                              Icon(Icons.restaurant_menu, size: iconSize * 0.9, color: Theme.of(context).primaryColor.withOpacity(0.7)),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                child: Text(
+                                  [location.foodCategory, location.representativeMenu]
+                                      .where((e) => e != null && e.isNotEmpty)
+                                      .join(' · '),
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: addressFontSize,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 2.0),
+                        ],
                         if (_shouldShowChefName()) ...[
                           Row(
                             children: [
@@ -270,9 +317,7 @@ class LocationCard extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
-                        ] else if (_isFoodSector()) ...[
-                          // Reserve space
-                          SizedBox(height: addressFontSize + (screenWidth < 360 ? 2.0 : 3.0)),
+                          SizedBox(height: screenWidth < 360 ? 2.0 : 3.0),
                         ],
                         Text(
                           location.address,
@@ -283,7 +328,7 @@ class LocationCard extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(height: screenWidth < 360 ? 6.0 : 8.0),
+                        SizedBox(height: screenWidth < 360 ? 4.0 : 6.0), // Reduced from 6/8 to compact the card
                         Row(
                           children: [
                             _buildStat(context, Icons.remove_red_eye, '${location.viewCount}', statFontSize, iconSize),

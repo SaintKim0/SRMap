@@ -19,7 +19,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 7,
+      version: 8,
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
@@ -43,6 +43,10 @@ class DatabaseHelper {
     }
     if (oldVersion < 7) {
       await db.execute('ALTER TABLE locations ADD COLUMN chef_name TEXT');
+    }
+    if (oldVersion < 8) {
+      await db.execute('ALTER TABLE locations ADD COLUMN food_category TEXT');
+      await db.execute('ALTER TABLE locations ADD COLUMN representative_menu TEXT');
     }
   }
 
@@ -68,6 +72,8 @@ class DatabaseHelper {
         content_release_year $intTypeNullable,
         michelin_tier $textTypeNullable,
         chef_name $textTypeNullable,
+        food_category $textTypeNullable,
+        representative_menu $textTypeNullable,
         phone_number $textTypeNullable,
         website $textTypeNullable,
         opening_hours $textTypeNullable,
